@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="maxBrightness" format="integer" />
+    <attr name="startBrightness" format="integer" />
+
+    <declare-styleable name="Parameter">
+        <attr name="parameterName" format="string" />
+        <attr name="maxValue" format="integer" />
+        <attr name="startValue" format="integer" />
+        <attr name="scaling" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="Sparkler">
+        <attr name="sparklerName" format="string" />
+        <attr name="maxBrightness"/>
+        <attr name="startBrightness"/>
+        <attr name="maxVariation" format="integer" />
+        <attr name="startVariation" format="integer" />
+        <attr name="maxSmoothing" format="integer" />
+        <attr name="startSmoothing" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="Blinker">
+        <attr name="blinkerName" format="string" />
+        <attr name="maxBrightness"/>
+        <attr name="startBrightness"/>
+        <attr name="maxOnTime" format="integer" />
+        <attr name="startOnTime" format="integer" />
+        <attr name="maxOffTime" format="integer" />
+        <attr name="startOffTime" format="integer" />
+        <attr name="maxOffsetTime" format="integer" />
+        <attr name="startOffsetTime" format="integer" />
+    </declare-styleable>
+</resources>
