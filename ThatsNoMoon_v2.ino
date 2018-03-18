@@ -3,6 +3,7 @@
 
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <WiFiManager.h>
 
 #include <Wire.h>
 #include <PCA9685.h>
@@ -11,14 +12,13 @@ IPAddress	serverIPAddress(192, 168, 0, 75);	// The desired IP Address of this de
 IPAddress	networkGateway(192, 168, 0, 1);		// Set gateway to match network settings
 IPAddress	networkSubnet(255, 255, 255, 0);	// Set subnet to match network settings
 
-#define			WIFI_AP "WiFi@Home"
-#define			WIFI_PASSWORD "@#1A2B3C$%"
-
 const int		WIFI_RETRYDELAY_ms = 5000;
-const char*		MQTT_SERVER = "m23.cloudmqtt.com";
-const int		MQTT_PORT = 15816;
-const char*		MQTT_USER = "gaihleym";
-const char*		MQTT_PASSWORD = "lRxHBxLB1z1r";
+
+char*		mqttServer = "m23.cloudmqtt.com";
+int			mqttPort = 15816;
+char*		mqttUsername = "gaihleym";
+char*		mqttPassword = "lRxHBxLB1z1r";
+
 const char*		MQTT_CLIENTID = "thatsnomoon";
 
 const char*		MQTT_SUBSCRIPTIONS[] = {	"rooms/cedric/control/#",  
@@ -30,6 +30,7 @@ const char*		MQTT_BASETOPIC = "thatsnomoon";
 
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
+WiFiManager wifiManager;
 
 PCA9685 pwmController;
 
@@ -79,11 +80,11 @@ void setup()
 	Serial.println("Complete.");
 
 	Serial.println("Testing outputs.");
-	testOutputs();
+	//testOutputs();
 	Serial.println("Complete.");
 
 	Serial.println("Setting default values.");
-	setToDay();
+	//setToDay();
 	Serial.println("Complete.");
 
 	Serial.println("Connecting to wifi.");
@@ -105,7 +106,7 @@ void loop()
 	wifiStatus = WiFi.status();
 	
 	if (wifiStatus != WL_CONNECTED) {
-		connectToWifi();
+		initializeWifi();
 	}
 	
 	if (!mqttClient.connected()) {
@@ -262,82 +263,34 @@ void updateAll() {
 
 void initializeWifi() {
 
-	WiFi.config(serverIPAddress, networkGateway, networkSubnet);
-	wifiStatus = WiFi.begin(WIFI_AP, WIFI_PASSWORD);
+	char portString[10];
+	itoa(mqttPort, portString, 10);
 
-	WiFi.enableAP(false);
+	wifiManager.resetSettings();
 
-	connectToWifi();
+	WiFiManagerParameter customMQTTServer("mqttServer", "MQTT Broker Address", mqttServer, 40);
+	wifiManager.addParameter(&customMQTTServer);
 
-}
+	WiFiManagerParameter customMQTTPort("mqttPort", "MQTT Broker Port", portString, 10);
+	wifiManager.addParameter(&customMQTTPort);
 
-void connectToWifi() {
+	WiFiManagerParameter customMQTTUsername("mqttUsernameNAME", "MQTT Broker Username", mqttUsername, 40);
+	wifiManager.addParameter(&customMQTTUsername);
 
-	if (wifiStatus != WL_CONNECTED) {
-		Serial.print("Trying to connect to wireless access point: \"");
-		Serial.print(String(WIFI_AP));
-		Serial.print("\" with ");
-		Serial.print(WIFI_RETRYDELAY_ms);
-		Serial.println("ms retry interval.");
-	}
-	else {
-		return;
-	}
+	WiFiManagerParameter customMQTTPassword("mqttPassword", "MQTT Broker Password", mqttPassword, 40);
+	wifiManager.addParameter(&customMQTTPassword);
 
-	//delay(1000); //Give some time to connect.
+	wifiManager.setDebugOutput(true);
+	wifiManager.autoConnect("ThatsNoMoonAP");
 
-	int retries = 0;
-	wifiStatus = WiFi.status();
+	mqttServer = (char *) customMQTTServer.getValue();
+	mqttUsername = (char *) customMQTTUsername.getValue();
 
-	while (wifiStatus != WL_CONNECTED) {								// As long as the wifi cannot connect, run trought this loop.
-		
-		switch (wifiStatus)
-		{
-			case WL_NO_SSID_AVAIL:
-				Serial.println("Failed. Retrying...");
-				Serial.println("The specified SSID cannot be reached.");
+	mqttPort = atoi(customMQTTPort.getValue());
 
-				showAvailableAccessPoints();
+	mqttPassword = (char *) customMQTTPassword.getValue();
 
-				break;
 
-			case WL_NO_SHIELD:
-				Serial.println("Failed. Retrying...");
-				Serial.println("WiFi shield not present or not accessible.");
-				Serial.println("If the shield is present, it could be that the baud-rate is incorrect.");
-				break;
-
-			case WL_CONNECT_FAILED:
-				
-				Serial.println("Failed. Retrying...");
-				Serial.println("The specified password, or SSID is incorrect, or the acces point is out of reach.");
-
-				showAvailableAccessPoints();
-
-				break;
-
-			case WL_IDLE_STATUS:
-
-				WiFi.begin(WIFI_AP, WIFI_PASSWORD);
-				break;
-
-			default:
-				Serial.println("Failed. Retrying...");
-				showAvailableAccessPoints();
-
-				break;
-		}
-
-		wifiStatus = WiFi.status(); //
-		retries++;
-		delay(WIFI_RETRYDELAY_ms);
-	}
-	Serial.println("Success!");
-	Serial.print("Connected to: \"");
-	Serial.print(String(WIFI_AP));
-	Serial.print("\" with IP4: \"");
-	Serial.print(WiFi.localIP());
-	Serial.println("\".");
 }
 
 void onMQTTMessageReceived(char * topic, byte * payload, unsigned int length) {
@@ -592,13 +545,13 @@ void connectToMQTT() {
 		Serial.println(F("."));
 
 		Serial.print(F("MQTT broker IP4:'"));
-		Serial.print(MQTT_SERVER);
+		Serial.print(mqttServer);
 		Serial.print(F("' port: '"));
-		Serial.print(MQTT_PORT);
+		Serial.print(mqttPort);
 		Serial.println(F("'."));
 
 		// Attempt to connect (clientId, username, password)
-		if (mqttClient.connect(MQTT_CLIENTID, MQTT_USER, MQTT_PASSWORD)) {
+		if (mqttClient.connect(MQTT_CLIENTID, mqttUsername, mqttPassword)) {
 			Serial.println("Success!");
 		}
 		else {
@@ -620,44 +573,9 @@ void connectToMQTT() {
 void initializeMQTT() {
 
 	lastSentTimestamp_ms = 0;
-	mqttClient.setServer(MQTT_SERVER, MQTT_PORT);
+	mqttClient.setServer(mqttServer, mqttPort);
 	mqttClient.setCallback(onMQTTMessageReceived);
 	connectToMQTT();
 
-}
-
-void showAvailableAccessPoints() {
-
-	int8_t numberOfAPs = WiFi.scanNetworks();
-
-	Serial.println("Found the following access points:");
-	Serial.println();
-
-	for (int8_t i = 0; i < numberOfAPs; i++)
-	{
-		Serial.print("--> '");
-		Serial.print(WiFi.SSID(i));
-		Serial.print("', signal strength: ");
-		Serial.print(WiFi.RSSI(i));
-		Serial.print("dBm ::: ");
-		if (WiFi.RSSI(i) >= -50)
-		{
-			Serial.println("Excellent.");
-		}
-		else if (WiFi.RSSI(i) >= -60)
-		{
-			Serial.println("Good.");
-		}
-		else if (WiFi.RSSI(i) >= -70)
-		{
-			Serial.println("Fair.");
-		}
-		else
-		{
-			Serial.println("Bad.");
-		}
-	}
-
-	Serial.println();
 }
 

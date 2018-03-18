@@ -1,5 +1,5 @@
-C:\Users\cedri\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Debug\ThatsNoMoon_v2.cpp.o: \
- C:\Users\cedri\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Debug\ThatsNoMoon_v2.cpp \
+C:\Users\cedri\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Release\ThatsNoMoon_v2.cpp.o: \
+ C:\Users\cedri\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Release\ThatsNoMoon_v2.cpp \
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Arduino.h \
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/stdlib_noniso.h \
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/binary.h \
@@ -32,7 +32,7 @@ C:\Users\cedri\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Debu
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/debug.h \
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu/pins_arduino.h \
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu/../generic/common.h \
- C:\Users\cedri\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Debug\LEDLITLIB.h \
+ C:\Users\cedri\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Release\LEDLITLIB.h \
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/ESP8266WiFi.h \
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/include/wl_definitions.h \
  C:\Users\cedri\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/IPAddress.h \
