@@ -10,6 +10,11 @@
         <attr name="startValue" format="integer" />
         <attr name="scaling" format="integer" />
     </declare-styleable>
+    <declare-styleable name="Light">
+        <attr name="lightName" format="string" />
+        <attr name="maxBrightness"/>
+        <attr name="startBrightness"/>
+    </declare-styleable>
     <declare-styleable name="Sparkler">
         <attr name="sparklerName" format="string" />
         <attr name="maxBrightness"/>

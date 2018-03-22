@@ -1,6 +1,7 @@
 package com.geekorations.thatsnomoon;
 
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Typeface;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,6 +48,34 @@ public class MainActivity extends AppCompatActivity {
     SeekBar seekbarOveralBrightness;
     Timer timer;
 
+    int[] introSounds={
+            R.raw.intro1,
+            R.raw.intro2,
+            R.raw.intro3,
+            R.raw.intro4,
+            R.raw.intro5,
+            R.raw.intro6,
+            R.raw.intro7,
+            R.raw.intro8,
+            R.raw.intro9,
+            R.raw.intro10,
+            R.raw.intro11,
+            R.raw.intro12,
+            R.raw.intro13,
+            R.raw.intro14,
+            R.raw.intro15,
+            R.raw.intro16,
+            R.raw.intro17,
+            R.raw.intro18,
+            R.raw.intro19,
+            R.raw.intro20,
+            R.raw.intro21,
+            R.raw.intro22,
+            R.raw.intro23,
+            R.raw.intro24,
+    };
+
+
     boolean toggle;
 
     Sparkler    thrustersSparkler;
@@ -54,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
     Sparkler    stars3Sparkler;
     Blinker     shipLandingBlinker;
     Blinker     shipIncomingBlinker;
-    //Light       landingPadLight;
-
+    Light       landingPadLight;
 
     boolean seekbarOveralBrightnessIsTracking;
     boolean changingSeekbar;
@@ -64,6 +93,36 @@ public class MainActivity extends AppCompatActivity {
     TextView TextViewAP;
 
     TextSwitcher txtSwtchr;
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        backgroundMP.setLooping(true);
+        backgroundMP.start();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        backgroundMP.pause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+
+
 
 
     @Override
@@ -114,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         this.stars3Sparkler = (Sparkler) findViewById(R.id.stars3Sparkler);
         this.shipIncomingBlinker = (Blinker) findViewById(R.id.incomingShipBlinker);
         this.shipLandingBlinker = (Blinker) findViewById(R.id.landingShipBlinker);
-
+        this.landingPadLight = (Light) findViewById(R.id.landingPlatformSpots);
 
         String clientId = MqttClient.generateClientId();
 
@@ -179,6 +238,9 @@ public class MainActivity extends AppCompatActivity {
                 else if (topic.startsWith("thatsnomoon/landingstrobes")) {
                     shipLandingBlinker.processMessage(topic, message);
                 }
+                else if (topic.startsWith("thatsnomoon/platformspots")) {
+                    shipLandingBlinker.processMessage(topic, message);
+                }
             }
 
             @Override
@@ -187,8 +249,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        int randomIntroSound = this.introSounds[new Random().nextInt(introSounds.length)];
+
         backgroundMP    = MediaPlayer.create(this, R.raw.endor_backgroundsounds);
-        introMP         = MediaPlayer.create(this, R.raw.intro);
+        introMP         = MediaPlayer.create(this, randomIntroSound);
         ewokHorn1MP     = MediaPlayer.create(this, R.raw.ewok_horn_var1);
         ewokHorn2MP     = MediaPlayer.create(this, R.raw.ewok_horn_var2);
         ewokHorn3MP     = MediaPlayer.create(this, R.raw.ewok_horn_var3);
@@ -197,9 +261,6 @@ public class MainActivity extends AppCompatActivity {
         lightsaberOffMP = MediaPlayer.create(this, R.raw.lightsabre_off);
         lightsaberHumMP = MediaPlayer.create(this, R.raw.lightsabre_hum);
         lightsaberHumMP.setLooping(true);
-
-        backgroundMP.setLooping(true);
-        backgroundMP.start();
 
         introMP.start();
 
@@ -266,6 +327,10 @@ public class MainActivity extends AppCompatActivity {
         this.shipLandingBlinker.setMQTTPublishTopic("apps/thatsnomoon/landingstrobes");
         this.shipLandingBlinker.setMQTTReceiveTopic("thatsnomoon/landingstrobes");
         this.shipLandingBlinker.setMQTTClient(client);
+
+        this.landingPadLight.setMQTTPublishTopic("apps/thatsnomoon/platformspots");
+        this.landingPadLight.setMQTTReceiveTopic("thatsnomoon/platformspots");
+        this.landingPadLight.setMQTTClient(client);
 
 
     }

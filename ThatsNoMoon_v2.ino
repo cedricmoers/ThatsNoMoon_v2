@@ -385,6 +385,7 @@ void onMQTTMessageReceived(char * topic, byte * payload, unsigned int length) {
 				else if (processLED(token, "stars3",				"thatsnomoon/stars3",					starStrand2,				payloadBuffer))	{return;}
 				else if (processLED(token, "incomingstrobes",		"thatsnomoon/incomingstrobes",			shipIncomingStrobes,		payloadBuffer))	{return;}
 				else if (processLED(token, "landingstrobes",		"thatsnomoon/landingstrobes",			shipLandingStrobes,			payloadBuffer))	{return;}
+				else if (processLED(token, "platformspots",			"thatsnomoon/platformspots",			landingPadSpots,			payloadBuffer))	{return;}
 				else
 				{
 					Serial.println("Topic is unhandled.");

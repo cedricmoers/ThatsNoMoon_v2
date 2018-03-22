@@ -194,9 +194,10 @@
                 android:text="Advanced" />
 
             <com.geekorations.thatsnomoon.Sparkler
+                android:background="#11FFFFFF"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:id="@+id/thrustersSparkler"
                 app:sparklerName="THRUSTERS"
                 app:maxBrightness="1023"
@@ -207,9 +208,10 @@
                 app:startSmoothing="1000"/>
 
             <com.geekorations.thatsnomoon.Sparkler
+                android:background="#11FFFFFF"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/stars1Sparkler"
                 app:sparklerName="STARS 1"
@@ -221,9 +223,10 @@
                 app:startSmoothing="1000"/>
 
             <com.geekorations.thatsnomoon.Sparkler
+                android:background="#11FFFFFF"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/stars2Sparkler"
                 app:sparklerName="STARS 2"
@@ -235,9 +238,10 @@
                 app:startSmoothing="1000"/>
 
             <com.geekorations.thatsnomoon.Sparkler
+                android:background="#11FFFFFF"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/stars3Sparkler"
                 app:sparklerName="STARS 3"
@@ -249,7 +253,8 @@
                 app:startSmoothing="1000"/>
 
             <com.geekorations.thatsnomoon.Blinker
-                android:layout_marginLeft="10dp"
+                android:background="#11FFFFFF"
+                android:padding="10dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/incomingShipBlinker"
                 android:layout_width="match_parent"
@@ -265,7 +270,8 @@
                 app:startOffsetTime="0"/>
 
             <com.geekorations.thatsnomoon.Blinker
-                android:layout_marginLeft="10dp"
+                android:background="#11FFFFFF"
+                android:padding="10dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/landingShipBlinker"
                 android:layout_width="match_parent"
@@ -279,6 +285,17 @@
                 app:startOffTime="980"
                 app:maxOffsetTime="2000"
                 app:startOffsetTime="345"/>
+
+            <com.geekorations.thatsnomoon.Light
+                android:background="#11FFFFFF"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/landingPlatformSpots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lightName="Landing Platform Spots"
+                app:maxBrightness="1023"
+                app:startBrightness="1023"/>
 
 
         </LinearLayout>
