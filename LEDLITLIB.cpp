@@ -633,7 +633,6 @@ bool LED::isFadeWaving() {
 
 BRIGHTNESS_TYPE LED::update()
 {
-
 	BRIGHTNESS_TYPE finalBrightnessPrevious;
 
 	if (this->mode != MODE_OFF) {
@@ -672,7 +671,6 @@ BRIGHTNESS_TYPE LED::update()
 
 			finalBrightnessPrevious = this->finalBrightness;
 
-			/*
 			DEBUG_PRINT_HEADER();
 			DEBUG_PRINT_F("The independent brightness is: ");
 			DEBUG_PRINT(this->finalBrightness);
@@ -681,7 +679,6 @@ BRIGHTNESS_TYPE LED::update()
 			DEBUG_PRINT_F(", the gamma-corrected brightness is: ");
 			DEBUG_PRINT(this->finalBrightnessLimitedCorrected);
 			DEBUG_PRINTLN_F(".");
-			*/
 		}
 
 

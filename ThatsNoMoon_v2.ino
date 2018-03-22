@@ -12,25 +12,25 @@ IPAddress	serverIPAddress(192, 168, 0, 75);	// The desired IP Address of this de
 IPAddress	networkGateway(192, 168, 0, 1);		// Set gateway to match network settings
 IPAddress	networkSubnet(255, 255, 255, 0);	// Set subnet to match network settings
 
-const int		WIFI_RETRYDELAY_ms = 5000;
+unsigned long previousMQTTConnectionAttempt = 0;
+unsigned long retryMQTTConnectionInterval = 30000; //ms
 
 char*		mqttServer = "m23.cloudmqtt.com";
 int			mqttPort = 15816;
 char*		mqttUsername = "gaihleym";
 char*		mqttPassword = "lRxHBxLB1z1r";
 
-const char*		MQTT_CLIENTID = "thatsnomoon";
+const char*	MQTT_CLIENTID = "thatsnomoon";
 
-const char*		MQTT_SUBSCRIPTIONS[] = {	"rooms/cedric/control/#",  
+const char*	MQTT_SUBSCRIPTIONS[] = {	"rooms/cedric/control/#",  
 											"apps/thatsnomoon/#"
 };
 
-const char*		MQTT_BASETOPIC = "thatsnomoon";
+const char*	MQTT_BASETOPIC = "thatsnomoon";
 
-
-WiFiClient espClient;
-PubSubClient mqttClient(espClient);
-WiFiManager wifiManager;
+WiFiClient		espClient;
+PubSubClient	mqttClient(espClient);
+WiFiManager		wifiManager;
 
 PCA9685 pwmController;
 
@@ -39,23 +39,23 @@ uint8_t wifiStatus = WL_IDLE_STATUS;
 unsigned long lastSentTimestamp_ms = 0;
 unsigned long lastUpdateTimestamp_ms = 0;
 
-LED shipIncomingStrobes = LED("ShipIncoming", 5, true, 0, 1023);
-LED shipIncomingThrusters = LED("ShipThrusters", 4, true, 0, 1023);
-LED shipLandingStrobes = LED("ShipLanding", 0, true, 0, 1023);
-LED antennaStrobes = LED("Antenna", 2, true, 0, 1023);
-LED landingPadSpots = LED("Spots", 14, true, 0, 1023);
+LED shipIncomingStrobes =		LED("ShipIncoming", 5, true, 0, 1023);
+LED shipIncomingThrusters =		LED("ShipThrusters", 4, true, 0, 1023);
+LED shipLandingStrobes =		LED("ShipLanding", 0, true, 0, 1023);
+LED antennaStrobes =			LED("Antenna", 2, true, 0, 1023);
+LED landingPadSpots =			LED("Spots", 14, true, 0, 1023);
 
-LED starStrand1 = LED("StarStrand1", 12, true, 0, 1023);
-LED starStrand2 = LED("StarStrand2", 13, true, 0, 1023);
-LED starStrand3 = LED("StarStrand3", 15, true, 0, 1023);
+LED starStrand1 =				LED("StarStrand1", 12, true, 0, 1023);
+LED starStrand2 =				LED("StarStrand2", 13, true, 0, 1023);
+LED starStrand3 =				LED("StarStrand3", 15, true, 0, 1023);
 
 
 void setup()
 {
+	Serial.begin(921600);
 
-	Serial.begin(115200);
-
-	delay(1500);
+	//Wait for a short time.
+	yield();
 
 	//Print a nice looking header:
 	Serial.println(F("_____________________________________________________"));
@@ -71,26 +71,31 @@ void setup()
 
 	Serial.println("Initializing LEDs.");
 
-	Wire.begin();                       // Wire must be started first
-	Wire.setClock(400000);              // Supported baud rates are 100kHz, 400kHz, and 1000kHz
-	pwmController.resetDevices();       // Software resets all PCA9685 devices on Wire line
-	pwmController.init(B000000);        // Address pins A5-A0 set to B010101
-	pwmController.setPWMFrequency(1500); // Default is 200Hz, supports 24Hz to 1526Hz
+	Wire.begin();							// Wire must be started first
+	Wire.setClock(400000);					// Supported baud rates are 100kHz, 400kHz, and 1000kHz
+
+	pwmController.resetDevices();			// Software resets all PCA9685 devices on Wire line
+	pwmController.init(B000000);			// Address pins A5-A0 set to B010101
+	pwmController.setPWMFrequency(1500);	// Default is 200Hz, supports 24Hz to 1526Hz
 
 	Serial.println("Complete.");
 
+	//Fade all the different outputs up and down, to test them.
 	Serial.println("Testing outputs.");
-	//testOutputs();
+	testOutputs();
 	Serial.println("Complete.");
 
+	//Set the painting to day mode, to load the default values.
 	Serial.println("Setting default values.");
-	//setToDay();
+	setToDay();
 	Serial.println("Complete.");
 
+	//Startup the wifi connection.
 	Serial.println("Connecting to wifi.");
 	initializeWifi();
 	Serial.println("Complete.");
 
+	//Connect to the MQTT server/broker.
 	Serial.println("Connecting to MQTT broker.");
 	initializeMQTT();
 	Serial.println("Complete.");
@@ -103,13 +108,9 @@ void setup()
 void loop()
 {
 
-	wifiStatus = WiFi.status();
-	
-	if (wifiStatus != WL_CONNECTED) {
-		initializeWifi();
-	}
-	
 	if (!mqttClient.connected()) {
+
+		antennaStrobes.setToOff();
 		connectToMQTT();
 	}
 	
@@ -136,14 +137,14 @@ void loop()
 
 		lastSentTimestamp_ms = millis();
 	}
-	
-	mqttClient.loop();
 
 	updateAll();
 
+	mqttClient.loop();
 }
 
 void testOutputs() {
+
 	waveLEDOneTime(shipIncomingStrobes);
 	waveLEDOneTime(shipIncomingThrusters);
 	waveLEDOneTime(shipLandingStrobes);
@@ -152,17 +153,20 @@ void testOutputs() {
 	waveLEDOneTime(starStrand1);
 	waveLEDOneTime(starStrand2);
 	waveLEDOneTime(starStrand3);
+
 }
 
-void waveLEDOneTime(LED led) {
-	led.fadeWave(5000, 1);
+void waveLEDOneTime(LED &led) {
+	Serial.println("waving led");
+	led.fadeWave(50, 1);
 	do {
-		pwmController.setChannelPWM(15, led.update() << 2);
+
+		updateAll();
+
 		yield();
-		delay(10);
 	} while (led.isFadeWaving() == true);
 	delay(100);
-
+	Serial.println("ended waving led");
 }
 
 void setToOff() {
@@ -173,14 +177,14 @@ void setToOff() {
 
 	Serial.println("Setting all outputs to off.");
 
-	shipIncomingStrobes.setToOff();
-	shipIncomingThrusters.setToOff();
-	shipLandingStrobes.setToOff();
-	antennaStrobes.setToOff();
-	landingPadSpots.setToOff();
-	starStrand1.setToOff();
-	starStrand2.setToOff();
-	starStrand3.setToOff();
+	shipIncomingStrobes		.setToOff();
+	shipIncomingThrusters	.setToOff();
+	shipLandingStrobes		.setToOff();
+	antennaStrobes			.setToOff();
+	landingPadSpots			.setToOff();
+	starStrand1				.setToOff();
+	starStrand2				.setToOff();
+	starStrand3				.setToOff();
 
 	publishToMQTT(topic, "off");
 
@@ -190,14 +194,14 @@ void setToDefaults() {
 
 	Serial.println("Setting all outputs to default.");
 
-	shipIncomingStrobes.setToBlink(200, 1000, 0, 1023, 0);
-	shipIncomingThrusters.setToConstant(800); //setToSparkle(0.95, 1023, 500, 20);
-	shipLandingStrobes.setToBlink(200, 990, 5000);
-	antennaStrobes.setToBlink(100, 2800, 254);
-	landingPadSpots.setToConstant(1023);
-	starStrand1.setToSparkle(0.7, 1023, 160, 10);
-	starStrand2.setToSparkle(0.8, 1023, 240, 10);
-	starStrand3.setToSparkle(0.9, 1023, 320, 10);
+	shipIncomingStrobes			.setToBlink(200, 1000, 0, 1023, 0);
+	shipIncomingThrusters		.setToSparkle(0.95, 1023, 500, 20);
+	shipLandingStrobes			.setToBlink(200, 990, 5000);
+	antennaStrobes				.setToBlink(100, 2800, 254);
+	landingPadSpots				.setToConstant(1023);
+	starStrand1					.setToSparkle(0.7, 1023, 160, 10);
+	starStrand2					.setToSparkle(0.8, 1023, 240, 10);
+	starStrand3					.setToSparkle(0.9, 1023, 320, 10);
 
 }
 
@@ -208,8 +212,6 @@ void setToDay() {
 	strcat(topic, "/mode");
 
 	Serial.println("Setting all outputs to day-mode.");
-
-	setToDefaults();
 
 	setBrightness(1023);
 
@@ -224,8 +226,6 @@ void setToNight() {
 	strcat(topic, "/mode");
 
 	Serial.println("Setting all outputs to night-mode.");
-
-	setToDefaults();
 
 	setBrightness(512);
 
@@ -250,6 +250,7 @@ void setBrightness(unsigned int value) {
 }
 
 void updateAll() {
+
 	shipIncomingStrobes.update();
 	shipIncomingThrusters.update();
 	shipLandingStrobes.update();
@@ -258,6 +259,29 @@ void updateAll() {
 	starStrand1.update();
 	starStrand2.update();
 	starStrand3.update();
+
+	unsigned long now = millis();
+
+	if (now - lastSentTimestamp_ms >= 20) {
+
+		uint16_t pwms[9];
+
+		pwms[0] = starStrand1			.getGammaCorrectedBrightness() *4;//Ok
+		pwms[1] = starStrand2			.getGammaCorrectedBrightness() * 4;//ok
+		pwms[2] = starStrand3			.getGammaCorrectedBrightness() * 4;//ok
+		pwms[3] = shipLandingStrobes	.getGammaCorrectedBrightness() * 4;
+		pwms[4] = shipIncomingThrusters	.getGammaCorrectedBrightness() * 4;
+		pwms[5] = landingPadSpots		.getGammaCorrectedBrightness() * 4;
+		pwms[6] = 0;
+		pwms[7] = shipIncomingStrobes	.getGammaCorrectedBrightness() * 4;
+		pwms[8] = antennaStrobes		.getGammaCorrectedBrightness() * 4;
+
+		pwmController.setChannelsPWM(0, 9, pwms);
+
+		lastUpdateTimestamp_ms = now;
+	}
+
+
 }
 
 
@@ -281,6 +305,9 @@ void initializeWifi() {
 	wifiManager.addParameter(&customMQTTPassword);
 
 	wifiManager.setDebugOutput(true);
+
+	wifiManager.setConfigPortalTimeout(180);
+
 	wifiManager.autoConnect("ThatsNoMoonAP");
 
 	mqttServer = (char *) customMQTTServer.getValue();
@@ -289,7 +316,6 @@ void initializeWifi() {
 	mqttPort = atoi(customMQTTPort.getValue());
 
 	mqttPassword = (char *) customMQTTPassword.getValue();
-
 
 }
 
@@ -353,36 +379,12 @@ void onMQTTMessageReceived(char * topic, byte * payload, unsigned int length) {
 					setBrightness(brightness);
 					token = strtok(NULL, "/");
 				}
-				else if (strcmp(token, "incomingthrusters") == 0)
-				{
-					token = strtok(NULL, "/");
-					processLED(token, "thatsnomoon/incomingthrusters", shipIncomingThrusters, payloadBuffer);
-				}
-				else if (strcmp(token, "stars1") == 0)
-				{
-					token = strtok(NULL, "/");
-					processLED(token, "thatsnomoon/stars1", starStrand1, payloadBuffer);
-				}
-				else if (strcmp(token, "stars2") == 0)
-				{
-					token = strtok(NULL, "/");
-					processLED(token, "thatsnomoon/stars2", starStrand2, payloadBuffer);
-				}
-				else if (strcmp(token, "stars3") == 0)
-				{
-					token = strtok(NULL, "/");
-					processLED(token, "thatsnomoon/stars3", starStrand3, payloadBuffer);
-				}
-				else if (strcmp(token, "incomingstrobes") == 0)
-				{
-					token = strtok(NULL, "/");
-					processLED(token, "thatsnomoon/incomingstrobes", shipIncomingStrobes, payloadBuffer);
-				}
-				else if (strcmp(token, "landingstrobes") == 0)
-				{
-					token = strtok(NULL, "/");
-					processLED(token, "thatsnomoon/landingstrobes", shipLandingStrobes, payloadBuffer);
-				}
+				else if (processLED(token, "incomingthrusters",		"thatsnomoon/incomingthrusters",		shipIncomingThrusters,		payloadBuffer))	{return;}
+				else if (processLED(token, "stars1",				"thatsnomoon/stars1",					starStrand1,				payloadBuffer)) {return;}
+				else if (processLED(token, "stars2",				"thatsnomoon/stars2",					starStrand2,				payloadBuffer))	{return;}
+				else if (processLED(token, "stars3",				"thatsnomoon/stars3",					starStrand2,				payloadBuffer))	{return;}
+				else if (processLED(token, "incomingstrobes",		"thatsnomoon/incomingstrobes",			shipIncomingStrobes,		payloadBuffer))	{return;}
+				else if (processLED(token, "landingstrobes",		"thatsnomoon/landingstrobes",			shipLandingStrobes,			payloadBuffer))	{return;}
 				else
 				{
 					Serial.println("Topic is unhandled.");
@@ -399,112 +401,169 @@ void onMQTTMessageReceived(char * topic, byte * payload, unsigned int length) {
 	}
 }
 
+//Returns a boolean true if the name matches the current subtopic.
+bool processLED(char *token, const char * name, const char* topic, LED &led, char * payloadBuffer) {
 
-void processLED(char *token, const char* topic, LED &led, char * payloadBuffer) {
+	if (strcmp(token, name) == 0){ //Compares the name with the current (sub) topic. 'strcmp' returns logic false if the string is matched.
+		token = strtok(NULL, "/");
+
+		char topicBuffer[64] = "";
+		strcpy(topicBuffer, topic);
+
+		if (strcmp(token, "brightness") == 0) {
+
+			Serial.print("Setting brightness to: ");
+			Serial.println(payloadBuffer);
+
+			unsigned int brightness = (unsigned int)atoi(payloadBuffer);
+
+			led.setBrightness(brightness);
+
+			strcat(topicBuffer, "/brightness");
+
+			publishToMQTT(topicBuffer, led.getDesiredBrightness());
+
+			token = strtok(NULL, "/");
+		}
+		else if (strcmp(token, "variation") == 0) {
+
+			Serial.print("Setting variation to: ");
+			Serial.println(payloadBuffer);
+
+			unsigned int variation = (unsigned int)atoi(payloadBuffer);
+
+			led.setSparkleIntensity(variation);
+
+			//strcat(topicBuffer, "/variation");
+			//
+			//publishToMQTT(topicBuffer, led.getSparkleIntensity());
+
+			token = strtok(NULL, "/");
+		}
+		else if (strcmp(token, "smoothing") == 0) {
+
+			Serial.print("Setting smoothing to: ");
+			Serial.println(payloadBuffer);
+
+			float smoothing = atof(payloadBuffer);
+
+			led.setSparkleSmoothing(smoothing);
+
+			//strcat(topicBuffer, "/smoothing");
+			//
+			//publishToMQTT(topicBuffer, led.getSparkleSmoothing());
+
+			token = strtok(NULL, "/");
+		}
+		else if (strcmp(token, "ontime") == 0) {
+
+			Serial.print("Setting on time to: ");
+			Serial.println(payloadBuffer);
+
+			unsigned int onTime = (unsigned int)atoi(payloadBuffer);
+
+			led.setBlinkOnTime(onTime);
+
+			//strcat(topicBuffer, "/ontime");
+			//
+			//publishToMQTT(topicBuffer, led.getBlinkOnTime());
+
+			token = strtok(NULL, "/");
+		}
+		else if (strcmp(token, "offtime") == 0) {
+
+			Serial.print("Setting off time to: ");
+			Serial.println(payloadBuffer);
+
+			unsigned int offTime = (unsigned int)atoi(payloadBuffer);
+
+			led.setBlinkOffTime(offTime);
+
+			//strcat(topicBuffer, "/offtime");
+			//
+			//publishToMQTT(topicBuffer, led.getBlinkOffTime());
+
+			token = strtok(NULL, "/");
+		}
+		else if (strcmp(token, "offsettime") == 0) {
+
+			Serial.print("Setting offset time to: ");
+			Serial.println(payloadBuffer);
+
+			unsigned int offsetTime = (unsigned int)atoi(payloadBuffer);
+
+			led.setBlinkOffset(offsetTime);
+
+			//strcat(topicBuffer, "/offsettime");
+			//
+			//publishToMQTT(topicBuffer, led.getBlinkOffset());
+
+			token = strtok(NULL, "/");
+		}
+		else
+		{
+			//Do nothing;
+		}
+
+		publishLEDVariables(topic, led);
+
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void publishLEDVariables(const char* topic, LED &led) {
 
 	char topicBuffer[64] = "";
 	strcpy(topicBuffer, topic);
 
-	if (strcmp(token, "brightness") == 0) {
+	strcat(topicBuffer, "/variation");
+	publishToMQTT(topicBuffer, led.getSparkleIntensity());
 
-		Serial.print("Setting brightness to: ");
-		Serial.println(payloadBuffer);
+	memset(topicBuffer, 0, sizeof(topicBuffer));
+	strcpy(topicBuffer, topic);
 
-		unsigned int brightness = (unsigned int)atoi(payloadBuffer);
+	strcat(topicBuffer, "/smoothing");
+	publishToMQTT(topicBuffer, led.getSparkleSmoothing());
 
-		led.setBrightness(brightness);
+	memset(topicBuffer, 0, sizeof(topicBuffer));
+	strcpy(topicBuffer, topic);
 
-		strcat(topicBuffer, "/brightness");
+	strcat(topicBuffer, "/ontime");
+	publishToMQTT(topicBuffer, led.getBlinkOnTime());
 
-		publishToMQTT(topicBuffer, led.getDesiredBrightness());
+	memset(topicBuffer, 0, sizeof(topicBuffer));
+	strcpy(topicBuffer, topic);
 
-		token = strtok(NULL, "/");
-	}
-	else if (strcmp(token, "variation") == 0) {
+	strcat(topicBuffer, "/offtime");
+	publishToMQTT(topicBuffer, led.getBlinkOffTime());
 
-		Serial.print("Setting variation to: ");
-		Serial.println(payloadBuffer);
+	memset(topicBuffer, 0, sizeof(topicBuffer));
+	strcpy(topicBuffer, topic);
 
-		unsigned int variation = (unsigned int)atoi(payloadBuffer);
-
-		led.setSparkleIntensity(variation);
-
-		strcat(topicBuffer, "/variation");
-
-		publishToMQTT(topicBuffer, led.getSparkleIntensity());
-
-		token = strtok(NULL, "/");
-	}
-	else if (strcmp(token, "smoothing") == 0) {
-
-		Serial.print("Setting smoothing to: ");
-		Serial.println(payloadBuffer);
-
-		float smoothing = atof(payloadBuffer);
-
-		led.setSparkleSmoothing(smoothing);
-
-		strcat(topicBuffer, "/smoothing");
-
-		publishToMQTT(topicBuffer, led.getSparkleSmoothing());
-
-		token = strtok(NULL, "/");
-	}
-	else if (strcmp(token, "ontime") == 0) {
-
-		Serial.print("Setting on time to: ");
-		Serial.println(payloadBuffer);
-
-		unsigned int onTime = (unsigned int)atoi(payloadBuffer);
-
-		led.setBlinkOnTime(onTime);
-
-		strcat(topicBuffer, "/ontime");
-
-		publishToMQTT(topicBuffer, led.getBlinkOnTime());
-
-		token = strtok(NULL, "/");
-	}
-	else if (strcmp(token, "offtime") == 0) {
-
-		Serial.print("Setting off time to: ");
-		Serial.println(payloadBuffer);
-
-		unsigned int offTime = (unsigned int)atoi(payloadBuffer);
-
-		led.setBlinkOffTime(offTime);
-
-		strcat(topicBuffer, "/offtime");
-
-		publishToMQTT(topicBuffer, led.getBlinkOffTime());
-
-		token = strtok(NULL, "/");
-	}
-	else if (strcmp(token, "offsettime") == 0) {
-
-		Serial.print("Setting offset time to: ");
-		Serial.println(payloadBuffer);
-
-		unsigned int offsetTime = (unsigned int)atoi(payloadBuffer);
-
-		led.setBlinkOffset(offsetTime);
-
-		strcat(topicBuffer, "/offsettime");
-
-		publishToMQTT(topicBuffer, led.getBlinkOffset());
-
-		token = strtok(NULL, "/");
-	}
+	strcat(topicBuffer, "/offsettime");
+	publishToMQTT(topicBuffer, led.getBlinkOffset());
 
 }
 
 
 void publishToMQTT(char * topic, char * message) {
-	Serial.print(mqttClient.publish(topic, message) ? "Published: '" : "Failed to publish: '");
-	Serial.print(message);
-	Serial.print("' on topic: '");
-	Serial.print(topic);
-	Serial.println("'.");
+	if (mqttClient.connected()) {
+		Serial.print(mqttClient.publish(topic, message, true) ? "Published: '" : "Failed to publish: '");
+		Serial.print(message);
+		Serial.print(F("' on topic: '"));
+		Serial.print(topic);
+		Serial.println(F("."));
+	}
+	else {
+		Serial.print(F("ERR::Tried to send MQTT message: '")); 
+		Serial.print(message); 
+		Serial.print(F("' on topic: '"));
+		Serial.print(topic); 
+		Serial.println(F("', but there is no connection with the MQTT server"));
+	}
 }
 
 void publishToMQTT(char * topic, double number) {
@@ -533,41 +592,54 @@ void subscribeToMQTTTopics() {
 		Serial.print(".");
 		mqttClient.loop();
 		Serial.println();
+		yield();
 	}
 }
 
 void connectToMQTT() {
-	// Loop until connected
-	while (!mqttClient.connected()) {
 
-		Serial.print(F("Trying to connect to MQTT broker as '"));
-		Serial.print(MQTT_CLIENTID);
-		Serial.println(F("."));
+	unsigned long now = millis();
 
-		Serial.print(F("MQTT broker IP4:'"));
-		Serial.print(mqttServer);
-		Serial.print(F("' port: '"));
-		Serial.print(mqttPort);
-		Serial.println(F("'."));
+	if (now - previousMQTTConnectionAttempt >= retryMQTTConnectionInterval) {
 
-		// Attempt to connect (clientId, username, password)
-		if (mqttClient.connect(MQTT_CLIENTID, mqttUsername, mqttPassword)) {
-			Serial.println("Success!");
+		if (WiFi.isConnected() == true) {
+
+			Serial.print(F("Trying to connect to MQTT broker as '"));
+			Serial.print(MQTT_CLIENTID);
+			Serial.println(F("."));
+
+			Serial.print(F("MQTT broker:'"));
+			Serial.print(mqttServer);
+			Serial.print(F("' port: '"));
+			Serial.print(mqttPort);
+			Serial.println(F("'."));
+
+			mqttClient.loop();
+
+			// Attempt to connect (clientId, username, password)
+			if (mqttClient.connect(MQTT_CLIENTID, mqttUsername, mqttPassword)) {
+
+				Serial.println("Success!");
+				mqttClient.publish("thatsnomoon/status", "ok");
+				subscribeToMQTTTopics();
+				antennaStrobes.setToBlink(100, 2800, 254);
+
+				mqttClient.loop();
+
+			}
+			else {
+
+				Serial.print("Failed. Client state: ");
+				Serial.print(mqttClient.state());
+				Serial.println(". Retrying in 5 seconds.");
+			}
 		}
 		else {
-			Serial.print("Failed. Client state: ");
-			Serial.print(mqttClient.state());
-			Serial.println(". Retrying in 5 seconds.");
-			delay(5000);
+			Serial.println(F("Not connected to a wifi access point. Reset the device to startup the configuration AP."));
 		}
 
-		mqttClient.loop();
+		previousMQTTConnectionAttempt = now;
 	}
-
-	delay(1000);
-
-	mqttClient.publish("thatsnomoon/status", "ok");
-	subscribeToMQTTTopics();
 }
 
 void initializeMQTT() {
