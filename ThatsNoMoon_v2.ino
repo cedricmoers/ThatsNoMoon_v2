@@ -20,6 +20,8 @@ int			mqttPort = 15816;
 char*		mqttUsername = "gaihleym";
 char*		mqttPassword = "lRxHBxLB1z1r";
 
+int tempPrev = 0;
+
 const char*	MQTT_CLIENTID = "thatsnomoon";
 
 const char*	MQTT_SUBSCRIPTIONS[] = {	"rooms/cedric/control/#",  
@@ -264,21 +266,39 @@ void updateAll() {
 
 	if (now - lastSentTimestamp_ms >= 20) {
 
-		uint16_t pwms[9];
+		uint16_t pwms[5];
+
+		pwms[0] = shipIncomingThrusters.getGammaCorrectedBrightness() * 4;
+		pwms[1] = landingPadSpots.getGammaCorrectedBrightness() * 4;
+		pwms[2] = 0;
+		pwms[3] = shipIncomingStrobes.getGammaCorrectedBrightness() * 4;
+		pwms[4] = antennaStrobes.getGammaCorrectedBrightness() * 4;
+
+		pwmController.setChannelsPWM(8, 5, pwms);
 
 		pwms[0] = starStrand1			.getGammaCorrectedBrightness() *4;//Ok
 		pwms[1] = starStrand2			.getGammaCorrectedBrightness() * 4;//ok
 		pwms[2] = starStrand3			.getGammaCorrectedBrightness() * 4;//ok
 		pwms[3] = shipLandingStrobes	.getGammaCorrectedBrightness() * 4;
-		pwms[4] = shipIncomingThrusters	.getGammaCorrectedBrightness() * 4;
-		pwms[5] = landingPadSpots		.getGammaCorrectedBrightness() * 4;
-		pwms[6] = 0;
-		pwms[7] = shipIncomingStrobes	.getGammaCorrectedBrightness() * 4;
-		pwms[8] = antennaStrobes		.getGammaCorrectedBrightness() * 4;
 
-		pwmController.setChannelsPWM(0, 9, pwms);
+		pwmController.setChannelsPWM(0, 4, pwms);
+
+		yield();
+
+
+
+		int temp = landingPadSpots.getGammaCorrectedBrightness() * 4;
+		if (tempPrev != temp) {
+			Serial.println(landingPadSpots.getGammaCorrectedBrightness() * 4);
+		}
+
+		tempPrev = temp;
 
 		lastUpdateTimestamp_ms = now;
+
+		yield();
+
+		delay(8);
 	}
 
 
@@ -290,7 +310,7 @@ void initializeWifi() {
 	char portString[10];
 	itoa(mqttPort, portString, 10);
 
-	wifiManager.resetSettings();
+	//wifiManager.resetSettings();
 
 	WiFiManagerParameter customMQTTServer("mqttServer", "MQTT Broker Address", mqttServer, 40);
 	wifiManager.addParameter(&customMQTTServer);
