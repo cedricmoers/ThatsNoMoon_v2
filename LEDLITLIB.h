@@ -205,9 +205,11 @@ public:
 	void setBlinkOffBrightness(BRIGHTNESS_TYPE brightness);
 	void resetBlinkTimer();											//Resets the blink timer;
 
+	char*			ID;
+
 private:
 
-	char*			ID;
+
 	uint8_t			pin;
 	uint8_t			mode;
 	bool gammaCorrectionEnabled;
@@ -257,8 +259,6 @@ private:
 
 	void setSparkleBrightness(BRIGHTNESS_TYPE brightness);					//Sets the sparkle average brightness.
 	void updateSparkle();
-
-
 
 };
 

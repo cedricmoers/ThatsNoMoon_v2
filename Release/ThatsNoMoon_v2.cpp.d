@@ -33,6 +33,7 @@ C:\Users\Cedric\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Rel
  C:\Users\Cedric\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/debug.h \
  C:\Users\Cedric\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu/pins_arduino.h \
  C:\Users\Cedric\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu/../generic/common.h \
+ C:\Users\Cedric\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\EEPROM/EEPROM.h \
  C:\Users\Cedric\AppData\Local\Temp\VMBuilds\ThatsNoMoon_v2\esp8266_nodemcuv2\Release\LEDLITLIB.h \
  C:\Users\Cedric\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/ESP8266WiFi.h \
  C:\Users\Cedric\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/include/wl_definitions.h \

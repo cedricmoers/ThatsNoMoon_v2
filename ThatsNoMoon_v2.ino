@@ -1,4 +1,5 @@
 
+#include <EEPROM.h>
 #include "LEDLITLIB.h"
 
 #include <ESP8266WiFi.h>
@@ -51,6 +52,15 @@ LED starStrand1 =				LED("StarStrand1", 12, true, 0, 1023);
 LED starStrand2 =				LED("StarStrand2", 13, true, 0, 1023);
 LED starStrand3 =				LED("StarStrand3", 15, true, 0, 1023);
 
+const uint16_t					EEPROM_ADDRESS_SHIPINCOMINGSTROBES		= 0;
+const uint16_t					EEPROM_ADDRESS_SHIPINCOMINGTHRUSTERS	= 32;
+const uint16_t					EEPROM_ADDRESS_SHIPLANDINGSTROBES		= 64;
+const uint16_t					EEPROM_ADDRESS_ANTENNASTROBES			= 96;
+const uint16_t					EEPROM_ADDRESS_LANDINGPADSPOTS			= 128;
+const uint16_t					EEPROM_ADDRESS_STARSTRAND1				= 160;
+const uint16_t					EEPROM_ADDRESS_STARSTRAND2				= 192;
+const uint16_t					EEPROM_ADDRESS_STARSTRAND3				= 224;
+
 
 void setup()
 {
@@ -87,6 +97,10 @@ void setup()
 	testOutputs();
 	Serial.println("Complete.");
 
+	//Init EEPROM 
+	//Take 32 bytes per led. To have some spare. -> total of 8 leds -> 256 bytes for EEPROM
+	EEPROM.begin(256);
+
 	//Set the painting to day mode, to load the default values.
 	Serial.println("Setting default values.");
 	setToDay();
@@ -105,6 +119,8 @@ void setup()
 	delay(100);
 
 	setToDefaults();
+
+	loadAllLEDs();
 }
 
 void loop()
@@ -205,6 +221,95 @@ void setToDefaults() {
 	starStrand2					.setToSparkle(0.8, 1023, 240, 10);
 	starStrand3					.setToSparkle(0.9, 1023, 320, 10);
 
+}
+
+//Take 32 bytes per led. To have some spare. -> total of 8 leds -> 256 bytes for EEPROM
+struct {
+	uint16_t brightness;	//2 bytes
+	uint16_t variation;		//2 bytes
+	uint16_t onTime;		//2 bytes
+	uint16_t offTime;		//2 bytes
+	uint16_t offsetTime;	//2 bytes
+	float smoothing;		//4 bytes
+} ledParameters;
+
+void saveLED(LED &led, uint16_t startingAddress, bool commit) {
+
+	ledParameters.brightness	= led.getBrightness();
+	ledParameters.offsetTime	= led.getBlinkOffset();
+	ledParameters.onTime		= led.getBlinkOnTime();
+	ledParameters.offTime		= led.getBlinkOffTime();
+	ledParameters.variation		= led.getSparkleIntensity();
+	ledParameters.smoothing		= led.getSparkleSmoothing();
+
+	Serial.printf("Saving led %s with parameters:\n\tBrightness: %i \n\tOffset: %i ms \n\tOffTime: %i ms \n\tOnTime: %i ms\n",
+		led.ID,
+		ledParameters.brightness,
+		ledParameters.offsetTime,
+		ledParameters.offTime,
+		ledParameters.onTime
+	);
+
+	EEPROM.put(startingAddress, ledParameters);
+
+	if (commit) {
+		EEPROM.commit();
+	}
+}
+
+void loadLED(LED &led, uint16_t startingAddress) {
+
+	EEPROM.get(startingAddress, ledParameters);
+
+	Serial.printf("Loaded led %s parameters:\n\tBrightness: %i \n\tOffset: %i ms \n\tOffTime: %i ms \n\tOnTime: %i ms\n",
+		led.ID,
+		ledParameters.brightness,
+		ledParameters.offsetTime,
+		ledParameters.offTime,
+		ledParameters.onTime
+	);
+
+	led.setBrightness(ledParameters.brightness);
+	led.setBlinkOffset(ledParameters.offsetTime);
+	led.setBlinkOnTime(ledParameters.onTime);
+	led.setBlinkOffTime(ledParameters.offTime);
+	led.setSparkleIntensity(ledParameters.variation);
+	led.setSparkleSmoothing(ledParameters.smoothing);
+
+}
+
+void saveAllLEDs() {
+
+	Serial.println("Saving all LEDs ...");
+
+	saveLED(shipIncomingStrobes,		EEPROM_ADDRESS_SHIPINCOMINGSTROBES, 	false);
+	saveLED(shipIncomingThrusters,		EEPROM_ADDRESS_SHIPINCOMINGTHRUSTERS,	false);
+	saveLED(shipLandingStrobes,			EEPROM_ADDRESS_SHIPLANDINGSTROBES, 		false);
+	saveLED(antennaStrobes,				EEPROM_ADDRESS_ANTENNASTROBES, 			false);
+	saveLED(landingPadSpots,			EEPROM_ADDRESS_LANDINGPADSPOTS,			false);
+	saveLED(starStrand1,				EEPROM_ADDRESS_STARSTRAND1, 			false);
+	saveLED(starStrand2,				EEPROM_ADDRESS_STARSTRAND2, 			false);
+	saveLED(starStrand3,				EEPROM_ADDRESS_STARSTRAND3, 			false);
+
+	EEPROM.commit();
+
+	Serial.println("Saving all LEDs complete!");
+}
+
+void loadAllLEDs() {
+
+	Serial.println("Loading all LEDs ...");
+
+	loadLED(shipIncomingStrobes,		EEPROM_ADDRESS_SHIPINCOMINGSTROBES			);
+	loadLED(shipIncomingThrusters,		EEPROM_ADDRESS_SHIPINCOMINGTHRUSTERS		);
+	loadLED(shipLandingStrobes,			EEPROM_ADDRESS_SHIPLANDINGSTROBES 			);
+	loadLED(antennaStrobes,				EEPROM_ADDRESS_ANTENNASTROBES 				);
+	loadLED(landingPadSpots,			EEPROM_ADDRESS_LANDINGPADSPOTS				);
+	loadLED(starStrand1,				EEPROM_ADDRESS_STARSTRAND1 					);
+	loadLED(starStrand2,				EEPROM_ADDRESS_STARSTRAND2 					);
+	loadLED(starStrand3,				EEPROM_ADDRESS_STARSTRAND3 					);
+
+	Serial.println("Loading all LEDs complete!");
 }
 
 void setToDay() {
@@ -399,13 +504,23 @@ void onMQTTMessageReceived(char * topic, byte * payload, unsigned int length) {
 					setBrightness(brightness);
 					token = strtok(NULL, "/");
 				}
-				else if (processLED(token, "incomingthrusters",		"thatsnomoon/incomingthrusters",		shipIncomingThrusters,		payloadBuffer))	{return;}
-				else if (processLED(token, "stars1",				"thatsnomoon/stars1",					starStrand1,				payloadBuffer)) {return;}
-				else if (processLED(token, "stars2",				"thatsnomoon/stars2",					starStrand2,				payloadBuffer))	{return;}
-				else if (processLED(token, "stars3",				"thatsnomoon/stars3",					starStrand2,				payloadBuffer))	{return;}
-				else if (processLED(token, "incomingstrobes",		"thatsnomoon/incomingstrobes",			shipIncomingStrobes,		payloadBuffer))	{return;}
-				else if (processLED(token, "landingstrobes",		"thatsnomoon/landingstrobes",			shipLandingStrobes,			payloadBuffer))	{return;}
-				else if (processLED(token, "platformspots",			"thatsnomoon/platformspots",			landingPadSpots,			payloadBuffer))	{return;}
+				else if (strcmp(token, "save") == 0)
+				{
+					saveAllLEDs();
+					token = strtok(NULL, "/");
+				}
+				else if (strcmp(token, "load") == 0)
+				{
+					saveAllLEDs();
+					token = strtok(NULL, "/");
+				}
+				else if (processLED(token, "incomingthrusters",		"thatsnomoon/incomingthrusters",		shipIncomingThrusters,		payloadBuffer,		EEPROM_ADDRESS_SHIPINCOMINGTHRUSTERS))	{return;}
+				else if (processLED(token, "stars1",				"thatsnomoon/stars1",					starStrand1,				payloadBuffer,		EEPROM_ADDRESS_STARSTRAND1 ))			{return;}
+				else if (processLED(token, "stars2",				"thatsnomoon/stars2",					starStrand2,				payloadBuffer,		EEPROM_ADDRESS_STARSTRAND2))			{return;}
+				else if (processLED(token, "stars3",				"thatsnomoon/stars3",					starStrand2,				payloadBuffer,		EEPROM_ADDRESS_STARSTRAND3))			{return;}
+				else if (processLED(token, "incomingstrobes",		"thatsnomoon/incomingstrobes",			shipIncomingStrobes,		payloadBuffer,		EEPROM_ADDRESS_SHIPINCOMINGSTROBES ))	{return;}
+				else if (processLED(token, "landingstrobes",		"thatsnomoon/landingstrobes",			shipLandingStrobes,			payloadBuffer,		EEPROM_ADDRESS_SHIPLANDINGSTROBES ))	{return;}
+				else if (processLED(token, "platformspots",			"thatsnomoon/platformspots",			landingPadSpots,			payloadBuffer,		EEPROM_ADDRESS_LANDINGPADSPOTS ))		{return;}
 				else
 				{
 					Serial.println("Topic is unhandled.");
@@ -423,7 +538,7 @@ void onMQTTMessageReceived(char * topic, byte * payload, unsigned int length) {
 }
 
 //Returns a boolean true if the name matches the current subtopic.
-bool processLED(char *token, const char * name, const char* topic, LED &led, char * payloadBuffer) {
+bool processLED(char *token, const char * name, const char* topic, LED &led, char * payloadBuffer, uint16_t eepromAddress) {
 
 	if (strcmp(token, name) == 0){ //Compares the name with the current (sub) topic. 'strcmp' returns logic false if the string is matched.
 		token = strtok(NULL, "/");
@@ -431,7 +546,17 @@ bool processLED(char *token, const char * name, const char* topic, LED &led, cha
 		char topicBuffer[64] = "";
 		strcpy(topicBuffer, topic);
 
-		if (strcmp(token, "brightness") == 0) {
+		if (strcmp(payloadBuffer, "save") == 0) {
+
+			saveLED(led, eepromAddress, true);
+
+		}
+		else if (strcmp(payloadBuffer, "load") == 0) {
+
+			loadLED(led, eepromAddress);
+
+		}
+		else if (strcmp(token, "brightness") == 0) {
 
 			Serial.print("Setting brightness to: ");
 			Serial.println(payloadBuffer);
@@ -455,10 +580,6 @@ bool processLED(char *token, const char * name, const char* topic, LED &led, cha
 
 			led.setSparkleIntensity(variation);
 
-			//strcat(topicBuffer, "/variation");
-			//
-			//publishToMQTT(topicBuffer, led.getSparkleIntensity());
-
 			token = strtok(NULL, "/");
 		}
 		else if (strcmp(token, "smoothing") == 0) {
@@ -469,10 +590,6 @@ bool processLED(char *token, const char * name, const char* topic, LED &led, cha
 			float smoothing = atof(payloadBuffer);
 
 			led.setSparkleSmoothing(smoothing);
-
-			//strcat(topicBuffer, "/smoothing");
-			//
-			//publishToMQTT(topicBuffer, led.getSparkleSmoothing());
 
 			token = strtok(NULL, "/");
 		}
@@ -485,10 +602,6 @@ bool processLED(char *token, const char * name, const char* topic, LED &led, cha
 
 			led.setBlinkOnTime(onTime);
 
-			//strcat(topicBuffer, "/ontime");
-			//
-			//publishToMQTT(topicBuffer, led.getBlinkOnTime());
-
 			token = strtok(NULL, "/");
 		}
 		else if (strcmp(token, "offtime") == 0) {
@@ -500,10 +613,6 @@ bool processLED(char *token, const char * name, const char* topic, LED &led, cha
 
 			led.setBlinkOffTime(offTime);
 
-			//strcat(topicBuffer, "/offtime");
-			//
-			//publishToMQTT(topicBuffer, led.getBlinkOffTime());
-
 			token = strtok(NULL, "/");
 		}
 		else if (strcmp(token, "offsettime") == 0) {
@@ -514,10 +623,6 @@ bool processLED(char *token, const char * name, const char* topic, LED &led, cha
 			unsigned int offsetTime = (unsigned int)atoi(payloadBuffer);
 
 			led.setBlinkOffset(offsetTime);
-
-			//strcat(topicBuffer, "/offsettime");
-			//
-			//publishToMQTT(topicBuffer, led.getBlinkOffset());
 
 			token = strtok(NULL, "/");
 		}
@@ -572,7 +677,7 @@ void publishLEDVariables(const char* topic, LED &led) {
 
 void publishToMQTT(char * topic, char * message) {
 	if (mqttClient.connected()) {
-		Serial.print(mqttClient.publish(topic, message, true) ? "Published: '" : "Failed to publish: '");
+		Serial.print(mqttClient.publish(topic, message) ? "Published: '" : "Failed to publish: '");
 		Serial.print(message);
 		Serial.print(F("' on topic: '"));
 		Serial.print(topic);
