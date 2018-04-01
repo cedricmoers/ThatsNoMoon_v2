@@ -15,17 +15,13 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  * Created by Cedric on 11/02/2018.
  */
 
-public class Blinker extends LinearLayout {
-
-    private String MQTTPublishTopic;
-    private String MQTTReceiveTopic;
+public class Blinker extends LedCard {
 
     public Parameter brightnessParameter;
     public Parameter onTimeParameter;
     public Parameter offTimeParameter;
     public Parameter offsetTimeParameter;
 
-    private String blinkerName;
     private int maxBrightness;
     private int maxOnTime;
     private int maxOffTime;
@@ -36,12 +32,8 @@ public class Blinker extends LinearLayout {
     private int startOffTime;
     private int startOffsetTime;
 
-    private TextView nameTextView;
-    private TextView foreignNameTextView;
-
     public Blinker(Context context) {
         super(context);
-
         initializeViews(context);
     }
 
@@ -49,8 +41,6 @@ public class Blinker extends LinearLayout {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Blinker);
-
-        blinkerName = a.getString(R.styleable.Blinker_blinkerName);
 
         maxBrightness       = a.getInteger(R.styleable.Blinker_maxBrightness, 1023);
         maxOnTime           = a.getInteger(R.styleable.Blinker_maxOnTime, 5000);
@@ -70,89 +60,66 @@ public class Blinker extends LinearLayout {
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.blinker_view, this);
+        inflater.inflate(R.layout.ledcard_view, this);
     }
 
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        brightnessParameter     = (Parameter) this.findViewById(R.id.brightnessParameter);
-        onTimeParameter         = (Parameter) this.findViewById(R.id.onTimeParameter);
-        offTimeParameter        = (Parameter) this.findViewById(R.id.offTimeParameter);
-        offsetTimeParameter     = (Parameter) this.findViewById(R.id.offsetTimeParameter);
-
-        nameTextView            = (TextView) this.findViewById(R.id.nameTextView);
-        foreignNameTextView     = (TextView) this.findViewById(R.id.foreignNameTextView);
+        this.brightnessParameter     = new Parameter(this.getContext());
+        this.onTimeParameter         = new Parameter(this.getContext());
+        this.offTimeParameter        = new Parameter(this.getContext());
+        this.offsetTimeParameter     = new Parameter(this.getContext());
 
         this.brightnessParameter.setBarMax(maxBrightness);
         this.onTimeParameter.setBarMax(maxOnTime);
         this.offTimeParameter.setBarMax(maxOffTime);
         this.offsetTimeParameter.setBarMax(maxOffsetTime);
 
-        this.brightnessParameter.setBarValue(startBrightness);
-        this.onTimeParameter.setBarValue(startOnTime);
-        this.offTimeParameter.setBarValue(startOffTime);
-        this.offsetTimeParameter.setBarValue(startOffsetTime);
+        this.brightnessParameter.setValue(startBrightness);
+        this.onTimeParameter.setValue(startOnTime);
+        this.offTimeParameter.setValue(startOffTime);
+        this.offsetTimeParameter.setValue(startOffsetTime);
 
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Aurebesh.ttf");
-        foreignNameTextView.setTypeface(font, Typeface.NORMAL);
+        this.brightnessParameter.setName("Brightness");
+        this.onTimeParameter.setName("On Time");
+        this.offTimeParameter.setName("Off Time");
+        this.offsetTimeParameter.setName("Offset");
 
-        foreignNameTextView.setSelected(true);
+        Parameter[] parameters = new Parameter[] {
+                this.brightnessParameter,
+                this.onTimeParameter,
+                this.offTimeParameter,
+                this.offsetTimeParameter
+        };
 
-        setBlinkerName(blinkerName);
-    }
-
-    public void setBlinkerName(String name) {
-
-        blinkerName = name;
-        nameTextView.setText(name);
-        foreignNameTextView.setText(name);
-
-    }
-
-    public void setMQTTClient(MqttAndroidClient client) {
-
-        this.brightnessParameter.setMQTTClient(client);
-        this.onTimeParameter.setMQTTClient(client);
-        this.offTimeParameter.setMQTTClient(client);
-        this.offsetTimeParameter.setMQTTClient(client);
-
+        this.setParameters(parameters);
     }
 
     public void setMQTTPublishTopic(String topic) {
 
-        this.MQTTPublishTopic = topic;
+        this.mqttPublishTopic = topic;
 
-        this.brightnessParameter.setMQTTTopic(this.MQTTPublishTopic + "/" +"brightness");
-        this.onTimeParameter.setMQTTTopic(this.MQTTPublishTopic + "/" +"ontime");
-        this.offTimeParameter.setMQTTTopic(this.MQTTPublishTopic + "/" +"offtime");
-        this.offsetTimeParameter.setMQTTTopic(this.MQTTPublishTopic + "/" +"offsettime");
-
-    }
-
-    public void setMQTTReceiveTopic(String topic) {
-
-        this.MQTTReceiveTopic = topic;
+        this.brightnessParameter.setMQTTTopic(this.mqttPublishTopic + "/" +"brightness");
+        this.onTimeParameter.setMQTTTopic(this.mqttPublishTopic + "/" +"ontime");
+        this.offTimeParameter.setMQTTTopic(this.mqttPublishTopic + "/" +"offtime");
+        this.offsetTimeParameter.setMQTTTopic(this.mqttPublishTopic + "/" +"offsettime");
 
     }
 
     public void processMessage(String topic, MqttMessage message) {
 
-        if (topic.equals(this.MQTTReceiveTopic + "/" +"brightness")) {
-            this.brightnessParameter.setActualValue(new String(message.getPayload()));
-            this.brightnessParameter.setBarValue(Integer.parseInt(new String(message.getPayload())));
+        if (topic.equals(this.mqttReceiveTopic + "/" +"brightness")) {
+            this.brightnessParameter.setValue(Integer.parseInt(new String(message.getPayload())));
         }
-        else if (topic.equals(this.MQTTReceiveTopic + "/" + "ontime")) {
-            this.onTimeParameter.setActualValue(new String(message.getPayload()));
-            this.onTimeParameter.setBarValue(Integer.parseInt(new String(message.getPayload())));
+        else if (topic.equals(this.mqttReceiveTopic + "/" + "ontime")) {
+            this.onTimeParameter.setValue(Integer.parseInt(new String(message.getPayload())));
         }
-        else if (topic.equals(this.MQTTReceiveTopic + "/" + "offtime")) {
-            this.offTimeParameter.setActualValue(new String(message.getPayload()));
-            this.offTimeParameter.setBarValue(Integer.parseInt(new String(message.getPayload())));
+        else if (topic.equals(this.mqttReceiveTopic + "/" + "offtime")) {
+            this.offTimeParameter.setValue(Integer.parseInt(new String(message.getPayload())));
         }
-        else if (topic.equals(this.MQTTReceiveTopic + "/" + "offsettime")) {
-            this.offsetTimeParameter.setActualValue(new String(message.getPayload()));
-            this.offsetTimeParameter.setBarValue(Integer.parseInt(new String(message.getPayload())));
+        else if (topic.equals(this.mqttReceiveTopic + "/" + "offsettime")) {
+            this.offsetTimeParameter.setValue(Integer.parseInt(new String(message.getPayload())));
         }
         else {
             //do nothing.

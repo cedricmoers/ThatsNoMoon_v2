@@ -9,7 +9,6 @@
     tools:context="com.geekorations.thatsnomoon.MainActivity">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,51 +30,51 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextSwitcher
-                android:id="@+id/textSwitcher"
-                android:textColor="@color/colorText"
-                android:layout_marginTop="32dp"
+        <TextSwitcher
+            android:id="@+id/textSwitcher"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:text="Lighting Mode" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/buttonModeDay"
                 android:layout_width="wrap_content"
-                android:layout_height="64dp"
-                android:layout_gravity="center"
-                android:text="Lighting Mode" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="publishModeDay"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="#FFFFFF"
+                android:text="Day" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/buttonModeNight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="publishModeNight"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="#FFFFFF"
+                android:text="Night" />
 
-                <Button
-                    android:id="@+id/buttonModeDay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="publishModeDay"
-                    android:backgroundTint="@color/colorAccent"
-                    android:textColor="#FFFFFF"
-                    android:text="Day" />
+            <Button
+                android:id="@+id/buttonModeOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="publishModeOff"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="#FFFFFF"
+                android:text="Off" />
 
-                <Button
-                    android:id="@+id/buttonModeNight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="publishModeNight"
-                    android:backgroundTint="@color/colorAccent"
-                    android:textColor="#FFFFFF"
-                    android:text="Night" />
-
-                <Button
-                    android:id="@+id/buttonModeOff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="publishModeOff"
-                    android:backgroundTint="@color/colorAccent"
-                    android:textColor="#FFFFFF"
-                    android:text="Off" />
-
-            </LinearLayout>
+        </LinearLayout>
 
             <TextView
                 android:textColor="@color/colorText"
@@ -134,7 +133,7 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
 
-                <TextView
+            <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -142,7 +141,7 @@
                     android:text="Connected To"
                     android:textColor="@color/colorPrimary" />
 
-                <TextView
+            <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewWifiAP"
@@ -151,7 +150,6 @@
                     android:gravity="end"
                     android:text="null"
                     android:layout_weight="1"/>
-
             </LinearLayout>
 
             <TextView
@@ -193,118 +191,108 @@
                 android:textColor="@color/colorText"
                 android:text="Advanced" />
 
-            <com.geekorations.thatsnomoon.Sparkler
-                android:background="#11FFFFFF"
-                android:padding="10dp"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/thrustersSparkler"
-                app:sparklerName="THRUSTERS"
-                app:maxBrightness="1023"
-                app:maxSmoothing="1000"
-                app:maxVariation="511"
-                app:startVariation="511"
-                app:startBrightness="1023"
-                app:startSmoothing="1000"/>
+                android:layout_height="450dp">
 
-            <com.geekorations.thatsnomoon.Sparkler
-                android:background="#11FFFFFF"
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:id="@+id/stars1Sparkler"
-                app:sparklerName="STARS 1"
-                app:maxBrightness="1023"
-                app:maxSmoothing="1000"
-                app:maxVariation="511"
-                app:startVariation="511"
-                app:startBrightness="1023"
-                app:startSmoothing="1000"/>
+                <com.geekorations.thatsnomoon.Sparkler
+                    android:id="@+id/thrustersSparkler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxBrightness="1023"
+                    app:maxSmoothing="1000"
+                    app:maxVariation="511"
+                    app:name="THRUSTERS"
+                    app:pictureSource="@drawable/thrusters"
+                    app:startBrightness="1023"
+                    app:startSmoothing="1000"
+                    app:startVariation="250" />
 
-            <com.geekorations.thatsnomoon.Sparkler
-                android:background="#11FFFFFF"
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:id="@+id/stars2Sparkler"
-                app:sparklerName="STARS 2"
-                app:maxBrightness="1023"
-                app:maxSmoothing="1000"
-                app:maxVariation="511"
-                app:startVariation="511"
-                app:startBrightness="1023"
-                app:startSmoothing="1000"/>
+                <com.geekorations.thatsnomoon.Sparkler
+                    android:id="@+id/stars1Sparkler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxBrightness="1023"
+                    app:maxSmoothing="1000"
+                    app:maxVariation="511"
+                    app:name="STARS 1"
+                    app:pictureSource="@drawable/stars_1"
+                    app:startBrightness="1023"
+                    app:startSmoothing="1000"
+                    app:startVariation="511" />
 
-            <com.geekorations.thatsnomoon.Sparkler
-                android:background="#11FFFFFF"
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:id="@+id/stars3Sparkler"
-                app:sparklerName="STARS 3"
-                app:maxBrightness="1023"
-                app:maxSmoothing="1000"
-                app:maxVariation="511"
-                app:startVariation="511"
-                app:startBrightness="1023"
-                app:startSmoothing="1000"/>
+                <com.geekorations.thatsnomoon.Sparkler
+                    android:id="@+id/stars2Sparkler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxBrightness="1023"
+                    app:maxSmoothing="1000"
+                    app:maxVariation="511"
+                    app:name="STARS 2"
+                    app:pictureSource="@drawable/stars_2"
+                    app:startBrightness="1023"
+                    app:startSmoothing="1000"
+                    app:startVariation="511" />
 
-            <com.geekorations.thatsnomoon.Blinker
-                android:background="#11FFFFFF"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/incomingShipBlinker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:blinkerName="Incoming Shuttle Strobes"
-                app:maxBrightness="1023"
-                app:startBrightness="1023"
-                app:maxOnTime="1000"
-                app:startOnTime="20"
-                app:maxOffTime="5000"
-                app:startOffTime="980"
-                app:maxOffsetTime="2000"
-                app:startOffsetTime="0"/>
+                <com.geekorations.thatsnomoon.Sparkler
+                    android:id="@+id/stars3Sparkler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxBrightness="1023"
+                    app:maxSmoothing="1000"
+                    app:maxVariation="511"
+                    app:name="STARS 3"
+                    app:pictureSource="@drawable/stars_3"
+                    app:startBrightness="1023"
+                    app:startSmoothing="1000"
+                    app:startVariation="511" />
 
-            <com.geekorations.thatsnomoon.Blinker
-                android:background="#11FFFFFF"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/landingShipBlinker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:blinkerName="Landing Shuttle Strobes"
-                app:maxBrightness="1023"
-                app:startBrightness="1023"
-                app:maxOnTime="1000"
-                app:startOnTime="20"
-                app:maxOffTime="5000"
-                app:startOffTime="980"
-                app:maxOffsetTime="2000"
-                app:startOffsetTime="345"/>
+                <com.geekorations.thatsnomoon.Blinker
+                    android:id="@+id/incomingShipBlinker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxBrightness="1023"
+                    app:maxOffTime="5000"
+                    app:maxOffsetTime="2000"
+                    app:maxOnTime="1000"
+                    app:name="INCOMING SHUTTLE STROBES"
+                    app:pictureSource="@drawable/ship_incoming"
+                    app:startBrightness="1023"
+                    app:startOffTime="980"
+                    app:startOffsetTime="0"
+                    app:startOnTime="20" />
 
-            <com.geekorations.thatsnomoon.Light
-                android:background="#11FFFFFF"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/landingPlatformSpots"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:lightName="Landing Platform Spots"
-                app:maxBrightness="1023"
-                app:startBrightness="1023"/>
+                <com.geekorations.thatsnomoon.Blinker
+                    android:id="@+id/landingShipBlinker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxBrightness="1023"
+                    app:maxOffTime="5000"
+                    app:maxOffsetTime="2000"
+                    app:maxOnTime="1000"
+                    app:name="LANDING SHUTTLE STROBES"
+                    app:pictureSource="@drawable/ship_landing"
+                    app:startBrightness="1023"
+                    app:startOffTime="980"
+                    app:startOffsetTime="345"
+                    app:startOnTime="20" />
 
+                <com.geekorations.thatsnomoon.Light
+                    android:id="@+id/landingPlatformSpots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxBrightness="1023"
+                    app:name="LANDING PLATFORM FLOODLIGHTS"
+                    app:pictureSource="@drawable/platform_spots"
+                    app:startBrightness="1023" />
+
+
+            </android.support.v4.view.ViewPager>
 
         </LinearLayout>
 
     </LinearLayout>
-
-
-
-
 
 
 </ScrollView>

@@ -38,6 +38,37 @@ public class Parameter extends LinearLayout {
     public  Parameter(Context context) {
         super(context);
         initializeViews(context);
+
+        this.valueConverter = null;
+
+        valueSeekBar = (SeekBar) this.findViewById(R.id.valueSeekBar);
+        nameTextView = (TextView) this.findViewById(R.id.nameTextView);
+        actualValueTextView = (TextView) this.findViewById(R.id.actualValueTextView);
+
+        nameTextView.setText(this.parameterName);
+        valueSeekBar.setMax(this.maxValue);
+        valueSeekBar.setProgress(this.startValue);
+    }
+
+    public  Parameter(Context context, String name, int maxValue, int startValue, int scaling) {
+        super(context);
+
+        this.parameterName = name;
+        this.maxValue = maxValue;
+        this.startValue = startValue;
+        this.scaling = scaling;
+
+        initializeViews(context);
+
+        this.valueConverter = null;
+
+        valueSeekBar = (SeekBar) this.findViewById(R.id.valueSeekBar);
+        nameTextView = (TextView) this.findViewById(R.id.nameTextView);
+        actualValueTextView = (TextView) this.findViewById(R.id.actualValueTextView);
+
+        nameTextView.setText(this.parameterName);
+        valueSeekBar.setMax(this.maxValue);
+        valueSeekBar.setProgress(this.startValue);
     }
 
     public Parameter(Context context, AttributeSet attrs) {
@@ -55,6 +86,16 @@ public class Parameter extends LinearLayout {
 
         initializeViews(context);
 
+        this.valueConverter = null;
+
+        this.valueSeekBar = (SeekBar) this.findViewById(R.id.valueSeekBar);
+        this.nameTextView = (TextView) this.findViewById(R.id.nameTextView);
+        this.actualValueTextView = (TextView) this.findViewById(R.id.actualValueTextView);
+
+        this.nameTextView.setText(this.parameterName);
+        this.valueSeekBar.setMax(this.maxValue);
+        this.valueSeekBar.setProgress(this.startValue);
+
 
     }
 
@@ -67,24 +108,13 @@ public class Parameter extends LinearLayout {
 
     protected void onFinishInflate() {
         super.onFinishInflate();
-
-        this.valueConverter = null;
-
-        valueSeekBar = (SeekBar) this.findViewById(R.id.valueSeekBar);
-        nameTextView = (TextView) this.findViewById(R.id.nameTextView);
-        actualValueTextView = (TextView) this.findViewById(R.id.actualValueTextView);
-
-        nameTextView.setText(parameterName);
-        valueSeekBar.setMax(maxValue);
-        valueSeekBar.setProgress(startValue);
-
     }
 
     public void setName(String name) {
         this.nameTextView.setText(name);
     }
 
-    public void setBarValue(int value) {
+    private void setBarValue(int value) {
 
         this.valueSeekBar.setProgress(value);
     }
@@ -111,17 +141,17 @@ public class Parameter extends LinearLayout {
 
     }
 
-    public void setActualValue(int value) {
+    private void setActualValue(int value) {
 
         this.actualValueTextView.setText(Integer.toString(value));
     }
 
-    public void setActualValue(double value) {
+    private void setActualValue(double value) {
 
         this.actualValueTextView.setText(Double.toString(value));
     }
 
-    public void setActualValue(String value) {
+    private void setActualValue(String value) {
 
         this.actualValueTextView.setText(value);
     }

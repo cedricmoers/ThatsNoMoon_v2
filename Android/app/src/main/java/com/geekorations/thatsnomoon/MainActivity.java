@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
             R.raw.intro3,
             R.raw.intro4,
             R.raw.intro5,
-            R.raw.intro6,
             R.raw.intro7,
             R.raw.intro8,
             R.raw.intro9,
@@ -331,6 +331,12 @@ public class MainActivity extends AppCompatActivity {
         this.landingPadLight.setMQTTPublishTopic("apps/thatsnomoon/platformspots");
         this.landingPadLight.setMQTTReceiveTopic("thatsnomoon/platformspots");
         this.landingPadLight.setMQTTClient(client);
+
+
+        CardPagerAdapter adapter = new CardPagerAdapter();
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setOffscreenPageLimit(10);
+        pager.setAdapter(adapter);
 
 
     }

@@ -15,20 +15,12 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  * Created by Cedric on 11/02/2018.
  */
 
-public class Light extends LinearLayout {
-
-    private String MQTTPublishTopic;
-    private String MQTTReceiveTopic;
+public class Light extends LedCard {
 
     public Parameter brightnessParameter;
 
-    private String lightName;
     private int maxBrightness;
-
     private int startBrightness;
-
-    private TextView nameTextView;
-    private TextView foreignNameTextView;
 
     public Light(Context context) {
         super(context);
@@ -40,8 +32,6 @@ public class Light extends LinearLayout {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Light);
-
-        lightName           = a.getString(R.styleable.Light_lightName);
 
         maxBrightness       = a.getInteger(R.styleable.Light_maxBrightness, 1023);
 
@@ -55,62 +45,39 @@ public class Light extends LinearLayout {
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.light_view, this);
+        inflater.inflate(R.layout.ledcard_view, this);
     }
 
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        brightnessParameter     = (Parameter) this.findViewById(R.id.brightnessParameter);
-
-        nameTextView            = (TextView) this.findViewById(R.id.nameTextView);
-        foreignNameTextView     = (TextView) this.findViewById(R.id.foreignNameTextView);
+        brightnessParameter     = new Parameter(this.getContext());
 
         this.brightnessParameter.setBarMax(maxBrightness);
+        this.brightnessParameter.setName("Brightness");
+        this.brightnessParameter.setValue(startBrightness);
 
-        this.brightnessParameter.setBarValue(startBrightness);
+        Parameter[] parameters = new Parameter[] {
+                brightnessParameter
+        };
 
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Aurebesh.ttf");
-        foreignNameTextView.setTypeface(font, Typeface.NORMAL);
-
-        foreignNameTextView.setSelected(true);
-
-        setLightName(lightName);
-    }
-
-    public void setLightName(String name) {
-
-        lightName = name;
-        nameTextView.setText(name);
-        foreignNameTextView.setText(name);
+        this.setParameters(parameters);
 
     }
 
-    public void setMQTTClient(MqttAndroidClient client) {
-
-        this.brightnessParameter.setMQTTClient(client);
-
-    }
 
     public void setMQTTPublishTopic(String topic) {
 
-        this.MQTTPublishTopic = topic;
+        this.mqttPublishTopic = topic;
 
-        this.brightnessParameter.setMQTTTopic(this.MQTTPublishTopic + "/" +"brightness");
-
-    }
-
-    public void setMQTTReceiveTopic(String topic) {
-
-        this.MQTTReceiveTopic = topic;
+        this.brightnessParameter.setMQTTTopic(this.mqttPublishTopic + "/" +"brightness");
 
     }
 
     public void processMessage(String topic, MqttMessage message) {
 
-        if (topic.equals(this.MQTTReceiveTopic + "/" +"brightness")) {
-            this.brightnessParameter.setActualValue(new String(message.getPayload()));
-            this.brightnessParameter.setBarValue(Integer.parseInt(new String(message.getPayload())));
+        if (topic.equals(this.mqttReceiveTopic + "/" +"brightness")) {
+            this.brightnessParameter.setValue(Integer.parseInt(new String(message.getPayload())));
         }
         else {
             //do nothing.
