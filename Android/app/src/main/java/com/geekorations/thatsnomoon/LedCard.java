@@ -3,8 +3,10 @@ package com.geekorations.thatsnomoon;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +32,9 @@ public class LedCard extends LinearLayout {
     protected String mqttPublishTopic;
     protected MqttAndroidClient mqttClient;
     protected Parameter[] parameters;
+
+    OnClickListener nextCardButtonClicked;
+    OnClickListener previousCardButtonClicked;
 
     public  LedCard(Context context) {
         super(context);
@@ -67,6 +72,27 @@ public class LedCard extends LinearLayout {
         this.foreignNameTextView        = (TextView) this.findViewById(R.id.foreignNameTextView);
         this.parameterContainer         = (LinearLayout)findViewById(R.id.parameterListViewAsLinearLayout);
         this.imageView                  = (ImageView) findViewById(R.id.imageView);
+
+        FloatingActionButton nextCardButton = (FloatingActionButton) this.findViewById(R.id.nextButton);
+        final FloatingActionButton previousCardButton = (FloatingActionButton) this.findViewById(R.id.previousButton);
+
+        nextCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nextCardButtonClicked!=null) {
+                    nextCardButtonClicked.onClick(v);
+                }
+            }
+        });
+
+        previousCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(previousCardButtonClicked!=null) {
+                    previousCardButtonClicked.onClick(v);
+                }
+            }
+        });
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Aurebesh.ttf");
         this.foreignNameTextView.setTypeface(font, Typeface.NORMAL);
@@ -159,5 +185,14 @@ public class LedCard extends LinearLayout {
     public void processMessage(String topic, MqttMessage message) {
 
             //do nothing.
+    }
+
+
+    public void setNextCardButtonClickedListener(OnClickListener eventListener) {
+        this.nextCardButtonClicked = eventListener;
+    }
+
+    public void setPreviousCardButtonClickedListener(OnClickListener eventListener) {
+        this.previousCardButtonClicked = eventListener;
     }
 }

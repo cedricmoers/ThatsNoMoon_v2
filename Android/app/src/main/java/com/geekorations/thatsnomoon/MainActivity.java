@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     TextView TextViewAP;
 
     TextSwitcher txtSwtchr;
+    private ViewPager pager;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -307,36 +308,120 @@ public class MainActivity extends AppCompatActivity {
         this.thrustersSparkler.setMQTTPublishTopic("apps/thatsnomoon/incomingthrusters");
         this.thrustersSparkler.setMQTTReceiveTopic("thatsnomoon/incomingthrusters");
         this.thrustersSparkler.setMQTTClient(client);
+        this.thrustersSparkler.setNextCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNextCard();
+            }
+        });
+        this.thrustersSparkler.setPreviousCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPreviousCard();
+            }
+        });
 
         this.stars1Sparkler.setMQTTPublishTopic("apps/thatsnomoon/stars1");
         this.stars1Sparkler.setMQTTReceiveTopic("thatsnomoon/stars1");
         this.stars1Sparkler.setMQTTClient(client);
+        this.stars1Sparkler.setNextCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNextCard();
+            }
+        });
+        this.stars1Sparkler.setPreviousCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPreviousCard();
+            }
+        });
 
         this.stars2Sparkler.setMQTTPublishTopic("apps/thatsnomoon/stars2");
         this.stars2Sparkler.setMQTTReceiveTopic("thatsnomoon/stars2");
         this.stars2Sparkler.setMQTTClient(client);
+        this.stars2Sparkler.setNextCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNextCard();
+            }
+        });
+        this.stars2Sparkler.setPreviousCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPreviousCard();
+            }
+        });
 
         this.stars3Sparkler.setMQTTPublishTopic("apps/thatsnomoon/stars3");
         this.stars3Sparkler.setMQTTReceiveTopic("thatsnomoon/stars3");
         this.stars3Sparkler.setMQTTClient(client);
+        this.stars3Sparkler.setNextCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNextCard();
+            }
+        });
+        this.stars3Sparkler.setPreviousCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPreviousCard();
+            }
+        });
 
         this.shipIncomingBlinker.setMQTTPublishTopic("apps/thatsnomoon/incomingstrobes");
         this.shipIncomingBlinker.setMQTTReceiveTopic("thatsnomoon/incomingstrobes");
         this.shipIncomingBlinker.setMQTTClient(client);
+        this.shipIncomingBlinker.setNextCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNextCard();
+            }
+        });
+        this.shipIncomingBlinker.setPreviousCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPreviousCard();
+            }
+        });
 
         this.shipLandingBlinker.setMQTTPublishTopic("apps/thatsnomoon/landingstrobes");
         this.shipLandingBlinker.setMQTTReceiveTopic("thatsnomoon/landingstrobes");
         this.shipLandingBlinker.setMQTTClient(client);
+        this.shipLandingBlinker.setNextCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNextCard();
+            }
+        });
+        this.shipLandingBlinker.setPreviousCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPreviousCard();
+            }
+        });
 
         this.landingPadLight.setMQTTPublishTopic("apps/thatsnomoon/platformspots");
         this.landingPadLight.setMQTTReceiveTopic("thatsnomoon/platformspots");
         this.landingPadLight.setMQTTClient(client);
+        this.landingPadLight.setNextCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNextCard();
+            }
+        });
+        this.landingPadLight.setPreviousCardButtonClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPreviousCard();
+            }
+        });
 
 
         CardPagerAdapter adapter = new CardPagerAdapter();
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setOffscreenPageLimit(10);
-        pager.setAdapter(adapter);
+        this.pager = (ViewPager) findViewById(R.id.pager);
+        this.pager.setOffscreenPageLimit(10);
+        this.pager.setAdapter(adapter);
 
 
     }
@@ -375,5 +460,17 @@ public class MainActivity extends AppCompatActivity {
         catch(MqttException e) {
             e.printStackTrace();
         }
+    }
+
+    private void onNextCard() {
+        this.pager.setCurrentItem(getCurrentPagerItem(+1), true);
+    }
+
+    private void onPreviousCard() {
+        this.pager.setCurrentItem(getCurrentPagerItem(-1), true);
+    }
+
+    private int getCurrentPagerItem(int offset) {
+        return this.pager.getCurrentItem() + offset;
     }
 }

@@ -20,24 +20,6 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="led_parametercard_bg.xml" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/main/res/drawable/led_parametercard_bg.xml">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="102">
-                    <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
     <window id="2">
       <content type="file-editors">
         <state>
@@ -59,7 +41,25 @@
     <window id="1">
       <content type="file-editors">
         <state>
-          <leaf>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file leaf-file-name="led_parametercard_bg.xml" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/main/res/drawable/led_parametercard_bg.xml">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="102">
+                    <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
             <file leaf-file-name="Sparkler.java" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Sparkler.java">
                 <provider selected="true" editor-type-id="text-editor">
@@ -81,21 +81,20 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state />
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="app" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Blinker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Blinker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="90" column="37" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="attr.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/values/attr.xml">
           <provider selected="true" editor-type-id="text-editor">
@@ -109,15 +108,18 @@
       <file leaf-file-name="Light.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Light.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="912">
+            <state relative-caret-position="1173">
               <caret line="78" column="46" selection-start-line="78" selection-start-column="46" selection-end-line="78" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="578">
               <caret line="196" column="45" selection-start-line="196" selection-start-column="45" selection-end-line="196" selection-end-column="45" />
@@ -127,15 +129,45 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ledcard_view.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/ledcard_view.xml">
           <provider editor-type-id="android-designer2">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="747">
+              <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="button_previous.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/drawable/button_previous.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="button_next.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/drawable/button_next.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CardPagerAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/CardPagerAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
+            <state relative-caret-position="595">
               <caret line="37" column="9" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -148,13 +180,65 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/MainActivity.java">
+      <file leaf-file-name="LedCard.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/LedCard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="328" column="54" selection-start-line="328" selection-start-column="54" selection-end-line="328" selection-end-column="54" />
+            <state relative-caret-position="368">
+              <caret line="87" column="46" selection-start-line="87" selection-start-column="46" selection-end-line="94" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2782#3020#0" expanded="true" />
+                <element signature="e#3019#3020#0" expanded="true" />
+                <element signature="e#3070#3316#0" expanded="true" />
+                <element signature="e#3315#3316#0" expanded="true" />
+                <element signature="method#setImageResource#0;class#LedCard#0" expanded="false" />
+                <element signature="method#setName#0;class#LedCard#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="412" column="65" selection-start-line="412" selection-start-column="65" selection-end-line="412" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#11017#11163#0" expanded="true" />
+                <element signature="e#11162#11163#0" expanded="true" />
+                <element signature="e#11234#11384#0" expanded="true" />
+                <element signature="e#11383#11384#0" expanded="true" />
+                <element signature="e#11647#11793#0" expanded="true" />
+                <element signature="e#11792#11793#0" expanded="true" />
+                <element signature="e#11861#12011#0" expanded="true" />
+                <element signature="e#12010#12011#0" expanded="true" />
+                <element signature="e#12274#12420#0" expanded="true" />
+                <element signature="e#12419#12420#0" expanded="true" />
+                <element signature="e#12488#12638#0" expanded="true" />
+                <element signature="e#12637#12638#0" expanded="true" />
+                <element signature="e#12901#13047#0" expanded="true" />
+                <element signature="e#13046#13047#0" expanded="true" />
+                <element signature="e#13115#13265#0" expanded="true" />
+                <element signature="e#13264#13265#0" expanded="true" />
+                <element signature="e#13566#13712#0" expanded="true" />
+                <element signature="e#13711#13712#0" expanded="true" />
+                <element signature="e#13785#13935#0" expanded="true" />
+                <element signature="e#13934#13935#0" expanded="true" />
+                <element signature="e#14230#14376#0" expanded="true" />
+                <element signature="e#14375#14376#0" expanded="true" />
+                <element signature="e#14448#14598#0" expanded="true" />
+                <element signature="e#14597#14598#0" expanded="true" />
+                <element signature="e#14879#15025#0" expanded="true" />
+                <element signature="e#15024#15025#0" expanded="true" />
+                <element signature="e#15094#15244#0" expanded="true" />
+                <element signature="e#15243#15244#0" expanded="true" />
+                <element signature="e#16387#16388#0" expanded="true" />
+                <element signature="e#16459#16460#0" expanded="true" />
+                <element signature="e#16496#16497#0" expanded="true" />
+                <element signature="e#16568#16569#0" expanded="true" />
+                <element signature="e#16619#16620#0" expanded="true" />
+                <element signature="e#16678#16679#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -162,40 +246,13 @@
       </file>
       <file leaf-file-name="parameter_view.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/parameter_view.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
               <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocalBroadcastManager.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-core-utils/25.3.1/support-core-utils-25.3.1-sources.jar!/android/support/v4/content/LocalBroadcastManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LedCard.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/LedCard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="146" column="16" selection-start-line="146" selection-start-column="16" selection-end-line="146" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#LedCard#0;class#LedCard#0" expanded="false" />
-                <element signature="method#LedCard#1;class#LedCard#0" expanded="false" />
-                <element signature="method#onFinishInflate#0;class#LedCard#0" expanded="false" />
-                <element signature="method#setImageResource#0;class#LedCard#0" expanded="false" />
-                <element signature="method#setName#0;class#LedCard#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -205,9 +262,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
         <option value="layoutResourceFile_vertical" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -749,6 +806,16 @@
                 <option name="name" value="prepareComAndroidSupportConstraintConstraintLayout102Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:design:25.3.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportDesign2531Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:recyclerview-v7:25.3.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportRecyclerviewV72531Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:support-compat:25.3.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportSupportCompat2531Library" />
@@ -807,6 +874,11 @@
                 <option name="description" value="Prepare com.android.support.test:runner:0.5" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportTestRunner05Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:transition:25.3.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportTransition2531Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1185,6 +1257,11 @@
                 <option name="name" value="processReleaseUnitTestJavaRes" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:design:25.3.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportDesign2531Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="javaPreCompileDebugAndroidTest" />
               </ExternalTaskPojo>
@@ -1200,6 +1277,11 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mergeReleaseResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:transition:25.3.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportTransition2531Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1306,6 +1388,11 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="javaPreCompileReleaseUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:recyclerview-v7:25.3.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportRecyclerviewV72531Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:support-core-ui:25.3.1" />
@@ -1691,7 +1778,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="D:\My Documents\Arduino\ThatsNoMoon_v2\Android\app" value="4550348122708" />
+        <entry key="D:\My Documents\Arduino\ThatsNoMoon_v2\Android\app" value="4555958156980" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2050,17 +2137,19 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/parameter_view.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/ParameterListAdapter.java" />
         <option value="$PROJECT_DIR$/build/intermediates/res/merged/debug/layout/ledcard_view.xml" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/ledcard_view.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Parameter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Sparkler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/LedCard.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/attr.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Blinker.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Light.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/PagerAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/CardPagerAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/drawable/button_next.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/drawable/button_previous.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/ledcard_view.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/LedCard.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2114,7 +2203,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2125,42 +2213,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Gradle Scripts" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raw" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2222,14 +2274,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2243,6 +2287,10 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thatsnomoon" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2272,12 +2320,21 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thatsnomoon" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2618,7 +2675,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2627,7 +2684,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.336887" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.336887" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2635,7 +2692,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49554566" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2676,71 +2733,31 @@
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/LedCard.java</url>
+          <line>48</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="12" />
+      <option name="time" value="13" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/LedCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#LedCard#0;class#LedCard#0" expanded="false" />
-            <element signature="method#LedCard#1;class#LedCard#0" expanded="false" />
-            <element signature="method#onFinishInflate#0;class#LedCard#0" expanded="false" />
-            <element signature="method#setImageResource#0;class#LedCard#0" expanded="false" />
-            <element signature="method#setName#0;class#LedCard#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/view/LayoutInflater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14637">
-          <caret line="861" column="0" selection-start-line="861" selection-start-column="0" selection-end-line="861" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#45177#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#7914#7915#0" expanded="false" />
-            <element signature="e#7948#7949#0" expanded="false" />
-            <element signature="e#9740#9741#0" expanded="false" />
-            <element signature="e#9771#9772#0" expanded="false" />
-            <element signature="e#10046#10047#0" expanded="false" />
-            <element signature="e#10077#10078#0" expanded="false" />
-            <element signature="e#10464#10465#0" expanded="false" />
-            <element signature="e#10496#10497#0" expanded="false" />
-            <element signature="e#12953#12954#0" expanded="false" />
-            <element signature="e#12983#12984#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/ledcard_view.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
           <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/ParameterListAdapter.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/blinker_view.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/blinker_view.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Light.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -2765,14 +2782,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/parameter_view.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/drawable/parameter_thumb.xml">
@@ -2788,11 +2805,48 @@
           <caret line="183" column="27" selection-start-line="183" selection-start-column="23" selection-end-line="183" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#11017#11163#0" expanded="true" />
+            <element signature="e#11162#11163#0" expanded="true" />
+            <element signature="e#11234#11384#0" expanded="true" />
+            <element signature="e#11383#11384#0" expanded="true" />
+            <element signature="e#11647#11793#0" expanded="true" />
+            <element signature="e#11792#11793#0" expanded="true" />
+            <element signature="e#11861#12011#0" expanded="true" />
+            <element signature="e#12010#12011#0" expanded="true" />
+            <element signature="e#12274#12420#0" expanded="true" />
+            <element signature="e#12419#12420#0" expanded="true" />
+            <element signature="e#12488#12638#0" expanded="true" />
+            <element signature="e#12637#12638#0" expanded="true" />
+            <element signature="e#12901#13047#0" expanded="true" />
+            <element signature="e#13046#13047#0" expanded="true" />
+            <element signature="e#13115#13265#0" expanded="true" />
+            <element signature="e#13264#13265#0" expanded="true" />
+            <element signature="e#13566#13712#0" expanded="true" />
+            <element signature="e#13711#13712#0" expanded="true" />
+            <element signature="e#13785#13935#0" expanded="true" />
+            <element signature="e#13934#13935#0" expanded="true" />
+            <element signature="e#14230#14376#0" expanded="true" />
+            <element signature="e#14375#14376#0" expanded="true" />
+            <element signature="e#14448#14598#0" expanded="true" />
+            <element signature="e#14597#14598#0" expanded="true" />
+            <element signature="e#14879#15025#0" expanded="true" />
+            <element signature="e#15024#15025#0" expanded="true" />
+            <element signature="e#15094#15244#0" expanded="true" />
+            <element signature="e#15243#15244#0" expanded="true" />
+            <element signature="e#16387#16388#0" expanded="true" />
+            <element signature="e#16459#16460#0" expanded="true" />
+            <element signature="e#16496#16497#0" expanded="true" />
+            <element signature="e#16568#16569#0" expanded="true" />
+            <element signature="e#16619#16620#0" expanded="true" />
+            <element signature="e#16678#16679#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="23" selection-end-column="52" />
@@ -2802,25 +2856,13 @@
           </folding>
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/drawable-xxhdpi/thatsnomoon.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/sparkler_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/sparkler_view.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Sparkler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -2828,28 +2870,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/blinker_view.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/light_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/blinker_view.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/light_view.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Light.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -2889,14 +2911,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/parameter_view.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/MainActivity.java">
@@ -2905,11 +2927,48 @@
           <caret line="183" column="27" selection-start-line="183" selection-start-column="23" selection-end-line="183" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#11017#11163#0" expanded="true" />
+            <element signature="e#11162#11163#0" expanded="true" />
+            <element signature="e#11234#11384#0" expanded="true" />
+            <element signature="e#11383#11384#0" expanded="true" />
+            <element signature="e#11647#11793#0" expanded="true" />
+            <element signature="e#11792#11793#0" expanded="true" />
+            <element signature="e#11861#12011#0" expanded="true" />
+            <element signature="e#12010#12011#0" expanded="true" />
+            <element signature="e#12274#12420#0" expanded="true" />
+            <element signature="e#12419#12420#0" expanded="true" />
+            <element signature="e#12488#12638#0" expanded="true" />
+            <element signature="e#12637#12638#0" expanded="true" />
+            <element signature="e#12901#13047#0" expanded="true" />
+            <element signature="e#13046#13047#0" expanded="true" />
+            <element signature="e#13115#13265#0" expanded="true" />
+            <element signature="e#13264#13265#0" expanded="true" />
+            <element signature="e#13566#13712#0" expanded="true" />
+            <element signature="e#13711#13712#0" expanded="true" />
+            <element signature="e#13785#13935#0" expanded="true" />
+            <element signature="e#13934#13935#0" expanded="true" />
+            <element signature="e#14230#14376#0" expanded="true" />
+            <element signature="e#14375#14376#0" expanded="true" />
+            <element signature="e#14448#14598#0" expanded="true" />
+            <element signature="e#14597#14598#0" expanded="true" />
+            <element signature="e#14879#15025#0" expanded="true" />
+            <element signature="e#15024#15025#0" expanded="true" />
+            <element signature="e#15094#15244#0" expanded="true" />
+            <element signature="e#15243#15244#0" expanded="true" />
+            <element signature="e#16387#16388#0" expanded="true" />
+            <element signature="e#16459#16460#0" expanded="true" />
+            <element signature="e#16496#16497#0" expanded="true" />
+            <element signature="e#16568#16569#0" expanded="true" />
+            <element signature="e#16619#16620#0" expanded="true" />
+            <element signature="e#16678#16679#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4828">
           <caret line="284" column="38" selection-start-line="284" selection-start-column="38" selection-end-line="284" selection-end-column="38" />
@@ -2918,9 +2977,6 @@
             <element signature="e#7268#7526#0" expanded="false" />
           </folding>
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
@@ -2986,25 +3042,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/light_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/led_thrusters_background.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/light_view.xml" />
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -3013,36 +3051,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/sparkler_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/ledcard_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/led_parametercard_bg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/sparkler_view.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Parameter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1065">
@@ -3069,30 +3078,18 @@
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-core-utils/25.3.1/support-core-utils-25.3.1-sources.jar!/android/support/v4/content/LocalBroadcastManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
+        <state relative-caret-position="1411">
           <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/LedCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="146" column="16" selection-start-line="146" selection-start-column="16" selection-end-line="146" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#LedCard#0;class#LedCard#0" expanded="false" />
-            <element signature="method#LedCard#1;class#LedCard#0" expanded="false" />
-            <element signature="method#onFinishInflate#0;class#LedCard#0" expanded="false" />
-            <element signature="method#setImageResource#0;class#LedCard#0" expanded="false" />
-            <element signature="method#setName#0;class#LedCard#0" expanded="false" />
+            <element signature="e#0#11425#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Blinker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
+        <state relative-caret-position="1377">
           <caret line="90" column="37" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
           <folding />
         </state>
@@ -3100,16 +3097,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Light.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
+        <state relative-caret-position="1173">
           <caret line="78" column="46" selection-start-line="78" selection-start-column="46" selection-end-line="78" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Sparkler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="83" column="14" selection-start-line="83" selection-start-column="0" selection-end-line="89" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -3122,28 +3111,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/blinker_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-902">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/PagerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/blinker_view.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/PagerAdapter.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/CardPagerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
+        <state relative-caret-position="595">
           <caret line="37" column="9" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3155,33 +3127,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-xxhdpi/stars3.png" />
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/led_parametercard_bg.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="328" column="54" selection-start-line="328" selection-start-column="54" selection-end-line="328" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/parameter_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        <state relative-caret-position="102">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/led_thrusters_background.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-xxhdpi/stars3.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/Sparkler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="83" column="14" selection-start-line="83" selection-start-column="0" selection-end-line="89" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/button_next.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/button_previous.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="196" column="45" selection-start-line="196" selection-start-column="45" selection-end-line="196" selection-end-column="45" />
@@ -3191,8 +3181,87 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/parameter_view.xml">
       <provider editor-type-id="android-designer2">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/ledcard_view.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="747">
+          <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/LedCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="87" column="46" selection-start-line="87" selection-start-column="46" selection-end-line="94" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2782#3020#0" expanded="true" />
+            <element signature="e#3019#3020#0" expanded="true" />
+            <element signature="e#3070#3316#0" expanded="true" />
+            <element signature="e#3315#3316#0" expanded="true" />
+            <element signature="method#setImageResource#0;class#LedCard#0" expanded="false" />
+            <element signature="method#setName#0;class#LedCard#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/geekorations/thatsnomoon/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="412" column="65" selection-start-line="412" selection-start-column="65" selection-end-line="412" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11017#11163#0" expanded="true" />
+            <element signature="e#11162#11163#0" expanded="true" />
+            <element signature="e#11234#11384#0" expanded="true" />
+            <element signature="e#11383#11384#0" expanded="true" />
+            <element signature="e#11647#11793#0" expanded="true" />
+            <element signature="e#11792#11793#0" expanded="true" />
+            <element signature="e#11861#12011#0" expanded="true" />
+            <element signature="e#12010#12011#0" expanded="true" />
+            <element signature="e#12274#12420#0" expanded="true" />
+            <element signature="e#12419#12420#0" expanded="true" />
+            <element signature="e#12488#12638#0" expanded="true" />
+            <element signature="e#12637#12638#0" expanded="true" />
+            <element signature="e#12901#13047#0" expanded="true" />
+            <element signature="e#13046#13047#0" expanded="true" />
+            <element signature="e#13115#13265#0" expanded="true" />
+            <element signature="e#13264#13265#0" expanded="true" />
+            <element signature="e#13566#13712#0" expanded="true" />
+            <element signature="e#13711#13712#0" expanded="true" />
+            <element signature="e#13785#13935#0" expanded="true" />
+            <element signature="e#13934#13935#0" expanded="true" />
+            <element signature="e#14230#14376#0" expanded="true" />
+            <element signature="e#14375#14376#0" expanded="true" />
+            <element signature="e#14448#14598#0" expanded="true" />
+            <element signature="e#14597#14598#0" expanded="true" />
+            <element signature="e#14879#15025#0" expanded="true" />
+            <element signature="e#15024#15025#0" expanded="true" />
+            <element signature="e#15094#15244#0" expanded="true" />
+            <element signature="e#15243#15244#0" expanded="true" />
+            <element signature="e#16387#16388#0" expanded="true" />
+            <element signature="e#16459#16460#0" expanded="true" />
+            <element signature="e#16496#16497#0" expanded="true" />
+            <element signature="e#16568#16569#0" expanded="true" />
+            <element signature="e#16619#16620#0" expanded="true" />
+            <element signature="e#16678#16679#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

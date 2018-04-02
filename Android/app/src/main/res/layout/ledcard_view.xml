@@ -24,7 +24,7 @@
             android:scaleType="centerCrop"
             android:maxHeight="150dp"
             android:minHeight="150dp"
-            app:srcCompat="@drawable/thatsnomoon" />
+            app:srcCompat="@drawable/cow" />
 
         <LinearLayout
             android:layout_margin="10dp"
@@ -39,6 +39,7 @@
                 android:text="name"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
+                android:elevation="60dp"
                 />
 
             <TextView
@@ -52,6 +53,28 @@
 
 
         </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/arrow_right"
+            android:tint="#FFFFFF"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:elevation="100dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/previousButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:src="@drawable/arrow_left"
+            android:tint="#FFFFFF"
+            android:clickable="true"
+            android:layout_margin="10dp" />
+
 
     </FrameLayout>
 
